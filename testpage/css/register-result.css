@@ -16,6 +16,7 @@ body {
 	border-radius: 5px;
 	padding: 20px;
 	width: 400px;	
+	text-align: center;
 }
 		
 #signup fieldset {
