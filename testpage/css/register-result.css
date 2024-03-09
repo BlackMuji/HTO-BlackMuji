@@ -1,21 +1,68 @@
-* {
+html, body {
+	height: 100%;
 	margin: 0;
-	padding: 0;
-}
-
-body {
-	padding: 20px;	
+  }
+  
+  body {
+	background-color: #ccc;
 	background-image: url('/testpage/image/main_img.png');
 	background-size: cover;
 	background-repeat: no-repeat;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	margin: 0;
+  }
+  
+  .login-section {
+	position: relative;
+	display: flex;
+	justify-content: center;
+  }
+
+.wrap {
+	height: 400px;
+    min-height: 400px;
+    max-height: 100%;
+    border-radius: 10px;
+    box-shadow: 8px 8px 8px rgba(0,0,0,0.1);
+    background-color: #fcfcfc;
+    overflow: hidden;
+	display: flex;
+}
+
+.blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+.image-wrapper {
+	background-color: #fff;
+	background-image: url('/testpage/image/starbucks.png');
+	width: 400px;
+	height: 400px;
+	position: relative;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+  
+.content-wrapper {
+	width: 600px;
+	height: 400px;
+	position: relative;
 }
 
 #signup {
 	background:#fff;
-	border:1px solid #222;
-	border-radius: 5px;
-	padding: 20px;
-	width: 400px;	
+	height: 100%;
+	width: 100%;	
 	text-align: center;
 }
 		
@@ -88,4 +135,9 @@ body {
 #signup button:hover {  /* #singup 하위에 있는 버튼에 마우스 올렸을 때 스타일 */
   background-color:#222;
   color:#fff;
+}
+
+.login_warp {
+	padding : 20px 0 35px;
+	text-align: center;
 }
