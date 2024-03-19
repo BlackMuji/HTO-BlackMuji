@@ -1,0 +1,42 @@
+.nav-menu {
+    height: 100%;
+}
+
+.bg-color-blue-nav {
+    background-color: #111927 !important;
+}
+
+body {
+    margin : 0;
+    color: #212529;
+    text-align: left;
+}
+
+.nav-menu .nav-menu-container{
+    padding: 0 15px;
+    display: block;
+}
+
+.container-lg {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.nav-com {
+    padding : 0.5rem 0;
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-self: space-between;
+}
+
+.navbar-brnad{
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    line-height: inherit;
+    white-space: nowrap;
+}

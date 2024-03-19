@@ -44,7 +44,7 @@ html, body {
 .image-wrapper {
 	background-color: #fff;
 	background-image: url('/testpage/image/starbucks.png');
-	width: 400px;
+	width: 600px;
 	height: 400px;
 	position: relative;
 	background-position: center;
@@ -54,7 +54,7 @@ html, body {
 }
   
 .content-wrapper {
-	width: 600px;
+	width: 400px;
 	height: 400px;
 	position: relative;
 }
@@ -67,7 +67,7 @@ html, body {
 }
 		
 #signup fieldset {
-	border: 1px solid #ccc;
+	border: none;
 	margin-bottom: 30px;
 }
 
@@ -141,3 +141,27 @@ html, body {
 	padding : 20px 0 35px;
 	text-align: center;
 }
+
+/* 로그인 버튼 스타일 */
+#signup button[type=login] {
+	background-color: #007bff;
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+  }
+  
+  #signup button[type=login]:hover {
+	background-color: #0056b3;
+  }
+  
+  /* 로그인 창 하단 링크 스타일 */
+  .login_warp a {
+	color: #333;
+	text-decoration: none;
+	margin: 0 10px;
+	transition: color 0.3s ease-in-out;
+  }
+  
+  .login_warp a:hover {
+	color: #007bff;
+  }
