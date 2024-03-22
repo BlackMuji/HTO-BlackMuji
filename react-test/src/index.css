@@ -18,10 +18,9 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url('/public/Hack_this_out_big.png');
+	background-color: #fff;
 	background-size: cover;
 	background-repeat: no-repeat;
-	filter: blur(10px); /* 배경 이미지에만 블러 효과를 적용합니다. */
 }
   
 .login-section {
@@ -54,7 +53,7 @@ body {
 
 .image-wrapper {
 	background-color: #fff;
-	background-image: url('/public/Hack_this_out.png');
+	background-image: url('/public/Logo_main.png');
 	width: 600px;
 	height: 400px;
 	position: relative;
