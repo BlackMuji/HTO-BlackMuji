@@ -1,4 +1,4 @@
-html, body {
+/*html, body {
 	height: 100%;
 	margin: 0;
   }
@@ -10,7 +10,7 @@ body {
 	justify-content: center;
 	min-height: 100vh;
 	margin: 0;
-}
+}*/
   
 .background-image {
 	position: fixed;
@@ -183,4 +183,3 @@ body {
 .login_wrap a:hover {
 	color: #007bff;
 }
-
