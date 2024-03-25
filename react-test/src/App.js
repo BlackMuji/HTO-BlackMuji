@@ -4,9 +4,7 @@ import './App.css'; // 필요한 CSS 파일을 import 해주세요
 
 function App(props) {
   return (
-  <a href="/animation">
-    <div className="background-image"></div>
-  </a>
+  <div className="background-image"></div>
 
   /*<section className="login-section">
     <div className="wrap">
