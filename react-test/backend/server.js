@@ -1,12 +1,27 @@
 const express = require('express');
 const connectDB = require('./config/db');
-const { configDotenv } = require('dotenv');
+const cors = require('cors');
 
-const app = express()
+
+const app = express();
 connectDB();
 
-app.get('/', (req, res) => res.send('API running'));
+app.use(cors());
+
+// 루트 경로에 대한 응답
+app.get('/', (req, res) => res.send('API is running'));
+
+// JSON 파싱 미들웨어 추가
+app.use(express.json({ extended: false }));
+
+// '/api/user' 등의 경로에 대한 요청을 각각의 라우터로 라우팅
+app.use('/api/user', require('./routes/api/user'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/post', require('./routes/api/post'));
+app.use('/api/profile', require('./routes/api/profile'));
+
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Sever starts on port ${PORT}`));
+// 서버 시작
+app.listen(PORT, () => console.log(`Server starts on port ${PORT}`));

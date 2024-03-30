@@ -1,0 +1,185 @@
+/*html, body {
+	height: 100%;
+	margin: 0;
+  }
+
+body {
+	background-color: #000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	margin: 0;
+}*/
+  
+.background-image {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-image: url('/public/Fullscreen.png');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.background-image:hover{
+	animation: change-background 2s forwards;
+}
+@keyframes change-background {
+	0% {
+		background-image: url('/public/Fullscreen.png');
+	}
+	100% {
+		background-image: url('/public/Fullscreen_black.png');
+	}
+}
+
+.login-section {
+	width: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	opacity: 0;
+    transition: opacity;
+}
+.background-image:hover + .login-section {
+	opacity: 1;
+}
+
+
+.wrap {
+	height: 400px;
+    min-height: 400px;
+    max-height: 100%;
+    border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+    box-shadow: 8px 8px 8px rgba(0,0,0,0.1);
+    background-color: #fcfcfc;
+    overflow: hidden;
+	display: flex;
+}
+
+.blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+.image-wrapper {
+	background-color: #fff;
+	background-image: url('/public/Logo_main.png');
+	width: 600px;
+	height: 400px;
+	position: relative;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+  
+.content-wrapper {
+	width: 400px;
+	height: 400px;
+	position: relative;
+}
+
+#signup {
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+#signup h1 {
+	text-align: center;
+}
+
+.input-box {
+	width: 100%;
+	height: 50px;
+	margin-bottom: 30px;
+	position: relative;
+}
+
+.input-box input {
+	width: calc(100% - 20px); /* 입력칸의 너비에서 padding 값을 제외 */
+	height: 100%;
+	background: #ddd;
+	border: none;
+	outline: none;
+	border: 2px solid rgba(255,255,255);
+	border-radius: 40px;
+	font-size: 16px;
+	color: #333;
+	padding-left: 20px; /* 입력된 내용을 오른쪽으로 20px만큼 이동시킵니다. */
+  }
+  
+.input-box input::placeholder {
+	font-weight: 600;
+	color: #333;
+}
+
+.input-box input[type="text"] {
+	padding-left: 20px; /* 입력된 내용을 오른쪽으로 5px만큼 이동시킵니다. */
+  }
+  
+  .input-box input[type="password"] {
+	padding-left: 20px; /* 입력된 내용을 오른쪽으로 5px만큼 이동시킵니다. */
+  }
+
+.input-box i {
+	position: absolute;
+	right: 30px;
+	transform: translateY(-190%);
+	font-size: 20px;
+}
+
+#signup .remember-forgot{
+	display: flex;
+	justify-content: space-between;
+	font-size: 15px;
+	margin: -15px 0 15px;
+}
+
+#signup .btn {
+	width: 100%;
+	height: 45px;
+	background: #ddd;
+	border: none;
+	outline: none;
+	border-radius: 40px;
+	cursor: pointer;
+	font-size: 16px;
+	color: #333;
+	font-weight: 600;
+	margin-top: 30px;
+}
+
+.remember-forgot label input {
+	accent-color: #fff;
+	margin-right: 3px;
+}
+
+.remember-forgot a
+
+/* 로그인 창 하단 링크 스타일 */
+.login_wrap {
+	align-content: center;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.login_wrap a {
+	width: 100%;
+	color: #333;
+	text-decoration: none;
+	margin: 0 15px;
+	transition: color 0.3s ease-in-out;
+}
+  
+.login_wrap a:hover {
+	color: #007bff;
+}
