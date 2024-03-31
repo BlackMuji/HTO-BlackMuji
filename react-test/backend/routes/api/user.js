@@ -13,10 +13,11 @@ router.get('/', (req, res) => res.send('post router'));
 router.post('/', 
 [
     check('name', 'Name is required').not().isEmpty(),
-    check('email', 'Please enter your email').isEmail(),
+    check('user_id', 'ID is required').not().isEmpty(),
     check('password', 'please enter a password with 8 or more').isLength({
         min: 8,
-    })
+    }),
+    check('email', 'Please enter your email').isEmail()
 ],
 async (req, res) => {
     const errors = validationResult(req);
@@ -46,6 +47,7 @@ async (req, res) => {
         })
         user = new User({
             name,
+            user_id,
             email,
             avatar,
             password
