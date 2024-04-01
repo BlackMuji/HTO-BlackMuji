@@ -1,7 +1,7 @@
 // RegisterForm.js
-import './css/RegisterForm.css'
+import '../css/RegisterForm.css'
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -43,10 +43,10 @@ function RegisterForm() {
   };
 
   return (
-    <div class="wrap">
-      <form class="content-wrapper" onSubmit={handleSubmit}>
+    <div className="wrap">
+      <form className="content-wrapper" onSubmit={handleSubmit}>
         <h1>회원가입</h1>
-        <div class="input-box">
+        <div className="input-box">
           <input
             type="text"
             name="name"
@@ -55,7 +55,7 @@ function RegisterForm() {
             onChange={handleChange}
           />
         </div>
-        <div class="input-box">
+        <div className="input-box">
           <input
             type="text"
             name="user_id"
@@ -64,7 +64,7 @@ function RegisterForm() {
             onChange={handleChange}
           />
         </div>
-        <div class="input-box">
+        <div className="input-box">
           <input
             type="password"
             name="password"
@@ -73,7 +73,7 @@ function RegisterForm() {
             onChange={handleChange}
           />
         </div>
-        <div class="input-box">
+        <div className="input-box">
           <input
             type="email"
             name="email"
@@ -82,28 +82,14 @@ function RegisterForm() {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">회원가입</button>
-      </form>
-    </div>
-    /*<div class="content-wrapper">
-      <h1>Login</h1>
-      <div class="input-box">
-        <input type="text" placeholder="아이디" required>
-        <i class='bx bxs-user'></i>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="비밀번호" required>
-        <i class='bx bxs-lock'></i>
-      </div>
-      <div class="remember-forgot">
-        <label><input type="checkbox"> Remember me</label>
-      </div>
-      <div class="login_wrap">
-        <a href="#">아이디 찾기</a>
-        <a href="#">비밀번호 찾기</a>
-        <a href="#">회원가입</a>
-      </div>
-      <button type="submit" class="btn">로그인</button></div>*/
+        <Link to="/test">
+          <button type="button">회원가입</button>
+        </Link>
+        <Link to="/">
+          <button type="button">이전화면</button>
+        </Link>
+      </form >
+    </div >
   );
 }
 

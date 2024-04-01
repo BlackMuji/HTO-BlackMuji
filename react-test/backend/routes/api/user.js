@@ -27,7 +27,7 @@ async (req, res) => {
         })
     }
 
-    const { name, email, password } = req.body;
+    const { name, user_id, email, password } = req.body;
     
     try {
         // 유저가 존재하는지 체크
