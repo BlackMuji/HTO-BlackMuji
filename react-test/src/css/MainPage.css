@@ -10,8 +10,10 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 }
-.background-image:hover{
-	animation: change-background 2s forwards;
+
+
+.change-background{
+	animation: change-background 5s forwards;
 }
 @keyframes change-background {
 	0% {
