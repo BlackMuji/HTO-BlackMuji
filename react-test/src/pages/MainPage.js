@@ -6,7 +6,7 @@ const MainPage = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-      navigate('/register');
+      navigate('/parent');
     };
 
     useEffect(() => {

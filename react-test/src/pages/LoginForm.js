@@ -1,5 +1,5 @@
 // LoginForm.js
-import '../css/LoginForm.css';
+import '../css/RegisterForm.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,9 @@ function LoginForm({ isActive }) {
           <div className="input-box">
             <input type="password" placeholder="비밀번호" />
           </div>
-          <button type="submit">로그인</button>
+          <Link to="/main">
+            <button type="submit">로그인</button>
+          </Link>
         </form>
       </div>
     </div>

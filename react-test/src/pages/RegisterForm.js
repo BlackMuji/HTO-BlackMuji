@@ -3,24 +3,24 @@ import '../css/RegisterForm.css'
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function RegisterForm() {
-  const [formData, setFormData] = useState({
+function RegisterForm({ isActive, handleSubmit, handleChange, formData }) {
+  /*const [formData, setFormData] = useState({
     name: '',
     user_id: '',
     password: '',
     email: ''
-  });
+  });*/
 
   // 입력 폼 변경 핸들러
-  const handleChange = (e) => {
+  /*const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-  };
+  };*/
 
   // 폼 제출 핸들러
-  const handleSubmit = (e) => {
+  /*const handleSubmit = (e) => {
     e.preventDefault();
 
     // POST 요청 보내기
@@ -40,10 +40,10 @@ function RegisterForm() {
         console.error('Error registering user:', error);
         // 등록에 실패했을 때 실행할 코드를 여기에 추가합니다.
       });
-  };
+  };*/
 
   return (
-    <div className="background">
+    <div className={`background ${isActive ? 'active' : ''}`}>
       <div className="wrap">
         <form className="content-wrapper" onSubmit={handleSubmit}>
           <h1>회원가입</h1>
@@ -83,17 +83,10 @@ function RegisterForm() {
               onChange={handleChange}
             />
           </div>
-          <Link to="/test">
-            <button type="button">회원가입</button>
-          </Link>
-          <Link to="/">
-            <button type="button">이전화면</button>
-          </Link>
-        </form >
-      </div >
+          <button type="submit">회원가입</button>
+        </form>
+      </div>
     </div>
-
   );
 }
-
 export default RegisterForm;
