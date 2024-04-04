@@ -29,11 +29,11 @@ function ParentForm() {
       .then(response => response.json())
       .then(data => {
         console.log('User registered:', data);
-        // 등록이 성공했을 때 실행할 코드를 여기에 추가합니다.
+        // 등록이 성공했을 때 실행할 코드를 여기에 추가
       })
       .catch(error => {
         console.error('Error registering user:', error);
-        // 등록에 실패했을 때 실행할 코드를 여기에 추가합니다.
+        // 등록에 실패했을 때 실행할 코드를 여기에 추가
       });
   };
 
