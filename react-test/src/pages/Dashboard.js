@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Dashboard.css';
 import logo from '../images/icon.png';
+import logo2 from '../images/logo.png';
 
 
 const Dashboard = () => {
@@ -10,7 +11,7 @@ const Dashboard = () => {
             <div className='main-nav'>
                 <div className='logo-wrap'>
                     <img src={logo} alt="" /> 
-                    <img src={logo} alt="" /> 
+                    <img src={logo2} alt="" /> 
                 </div>
                 <div className='nav-content'>
                     <div className='link-wrap'>
