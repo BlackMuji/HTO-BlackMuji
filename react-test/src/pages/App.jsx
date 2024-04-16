@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 
 import MainPage from './MainPage';
-import ParentForm from './ParentForm'; // ParentForm을 import 합니다.
+import RegisterForm from './RegisterForm';
 import Dashboard from './Dashboard';
 
 function App() {
@@ -10,9 +10,8 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<MainPage />}>
-            {/*<Route path="/parent" element={<ParentForm />}/>*/}
-          </Route>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/register" element={<RegisterForm />}/>
           <Route path="/main" element={<Dashboard />} />
         </Routes>
       </div>

@@ -1,22 +1,27 @@
-import React, { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/MainPage.scss';
 
 const MainPage = () => {
-  const navigate = useNavigate();
+  /*const navigate = useNavigate();*/
 
-  const handleClick = () => {
-    navigate('/parent');
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleBackgroundClick = () => {
+    setIsClicked(!isClicked); // 배경 이미지 클릭 시 상태 변경
   };
 
-  useEffect(() => {
-    document.querySelector('.background-image').classList.add('change-background');
-  }, []);
+  // useEffect(() => {
+  //   document.querySelector('.background-image').classList.add('change-background');
+  // }, []);
 
   return (
     <div>
-      <div className="background-image" /*onClick={handleClick}*/></div>
-      <form className="content-wrapper">
+      <div
+        className={isClicked ? "background-image change-background" : "background-image"} // 상태에 따라 클래스 변경
+        onClick={handleBackgroundClick} // 배경 이미지 클릭 시 이벤트 핸들러 호출
+      ></div>
+      <form className={isClicked ? "content-wrapper visible" : "content-wrapper"}>
         <h1>로그인</h1>
         <div className='login-form'>
           <div className="input-box">
@@ -25,11 +30,14 @@ const MainPage = () => {
           <div className="input-box">
             <input type="password" placeholder="비밀번호" />
           </div>
-          <button type="submit">로그인</button>
+          <Link to="/main">
+            <button type="submit">로그인</button>
+          </Link>
         </div>
-        <h5>footer</h5>
+        <Link to="/register">
+          <h4>회원가입</h4>
+        </Link>
       </form>
-      {/*<Outlet />*/}
     </div>
   );
 };
