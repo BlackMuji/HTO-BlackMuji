@@ -11,7 +11,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<MainPage />}>
-            <Route path="/parent" element={<ParentForm />}/>
+            {/*<Route path="/parent" element={<ParentForm />}/>*/}
           </Route>
           <Route path="/main" element={<Dashboard />} />
         </Routes>

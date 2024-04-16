@@ -1,3 +1,5 @@
+@import './mixin.scss'; // 이 부분에 mixin 파일을 올바르게 불러오는 코드를 추가합니다.
+
 * {
     padding: 0;
     margin: 0;
@@ -8,10 +10,8 @@ body {
 }
 
 .application-wrap {
-    -webkit-box-flex: 1;
+    @extend flex-container;
     flex: 1 1 auto;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     flex-direction: column;
     min-height: 100vh;
     max-width: 100%;
@@ -29,7 +29,7 @@ body {
     background-color: #363636;
 }
 
-.top-wrap{
+.top-wrap {
     position: fixed;
     top: 0;
     z-index: 5;
@@ -43,9 +43,8 @@ body {
 }
 
 .top-nav-bar {
-    -webkit-box-align: center;
+    @extend flex-container;
     align-items: center;
-    display: flex;
     position: relative;
     z-index: 0;
 }

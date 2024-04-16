@@ -1,5 +1,5 @@
 // LoginForm.js
-import '../css/RegisterForm.css';
+import '../css/RegisterForm.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 

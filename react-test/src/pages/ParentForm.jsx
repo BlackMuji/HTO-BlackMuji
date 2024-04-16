@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
-import '../css/ParentForm.css';
+import '../css/ParentForm.scss';
 
 function ParentForm() {
   const [formData, setFormData] = useState({

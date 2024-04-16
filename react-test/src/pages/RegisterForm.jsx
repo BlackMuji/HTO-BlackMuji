@@ -1,5 +1,5 @@
 // RegisterForm.js
-import '../css/RegisterForm.css'
+import '../css/RegisterForm.scss'
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
