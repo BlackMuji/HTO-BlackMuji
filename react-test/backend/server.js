@@ -1,12 +1,13 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
-
+const cookieParser = require("cookie-parser");
 
 const app = express();
 connectDB();
 
 app.use(cors());
+app.use(cookieParser());
 
 // 루트 경로에 대한 응답
 app.get('/', (req, res) => res.send('API is running'));
