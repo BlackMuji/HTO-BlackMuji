@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // 기존 컴포넌트
 import MainPage from './MainPage';
 import RegisterForm from './RegisterForm';
-import Dashboard from './Dashboard';
 import Main from '../components/section/Main';
 
 // 비동기 로딩을 위한 Lazy 컴포넌트
@@ -25,7 +24,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/register" element={<RegisterForm />} />
-          <Route path="/main" element={<Dashboard />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/Tutorial" element={<Tutorial />} />
           <Route path="/Challenges" element={<Challenges />} />
           <Route path="/Rankings" element={<Rankings />} />

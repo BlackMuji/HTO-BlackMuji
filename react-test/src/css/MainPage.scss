@@ -38,6 +38,9 @@
 	text-align: center;
 	transition: left 0.5s; /* 변경 */
 
+	.h1 {
+		color: #000;
+	}
 	&.visible {
 	  left: 80%; /* 변경 */
 	}
