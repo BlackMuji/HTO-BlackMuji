@@ -17,26 +17,15 @@ app.use(cookieParser());
 
 
 router.get('/', auth, async (req, res) => {
-    /*try {
-        const user = await User.findById(req.user.id).select('-password');
-        res.json(user);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }*/
-    res.json({
-        success: "true"
+    const user = await User.findById(req.user.id).select('-password');
+
+    res.json({     
+            user_id: user.user_id,
+            email: user.email,
+            name: user.name,
+            date: user.date
+
     })
-    /*
-    res.status(200).json({
-        _id: req.user._id,
-        // 0> 일반 유저 ^ 나머지 관리자
-        isAdmin: req.user.role === 0 ? false : true,
-        isAuth: true,
-        email: req.user.email,
-        name: req.user.name,
-        role: req.user.role
-      });*/
 });
 
 router.post('/',
@@ -95,23 +84,12 @@ router.post('/',
               });*/
 
             //토큰을 생성하여 쿠키에 저장
-            jwt.sign(payload,
-                config.get('jswtSecret'),
-                { expiresIn: 7200 },
-                (err, token) => {
-                    if (err) throw err;
-                    
-                    user.token = token;
-                    user.save();
+            token = jwt.sign(payload, config.get('jswtSecret'),{ expiresIn: 7200 })
+            user.token = token;
+            user.save();
 
-                    res.cookie("x_auth", token,{
-                            path: '/',
-                            httpOnly: true
-                        })
-                        .json({ token });
-                        //.json({ loginSuccess: "true", userId: user.user_id });
-                });
-
+            res.cookie("token", token);
+            res.json({token});
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server error1');

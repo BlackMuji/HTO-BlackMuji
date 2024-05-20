@@ -2,11 +2,16 @@ const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
-
+const jwt = require('jsonwebtoken');
 const app = express();
 connectDB();
 
-app.use(cors({ origin: '*' }));
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+
 app.use(cookieParser());
 
 // 루트 경로에 대한 응답
