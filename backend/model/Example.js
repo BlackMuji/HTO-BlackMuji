@@ -1,18 +1,22 @@
 const mongoose = require('mongoose');
 
 const ExampleSchema = new mongoose.Schema({
-    id: {
-        type: Number
-    },
+    numericId: {
+        type: Number,
+        required: true,
+        unique: true
+      },
     title: {
         type: String,
         requried: true,
     },
-    detail: [String],
+    content: [String],
+    answer: [String],
+    theme: String,
     date: {
         type: Date,
         default: Date.now
     }
 });
 
-module.exports = Example = mongoose.model('example', ExampleSchema)
+module.exports = Example = mongoose.model('Example', ExampleSchema)

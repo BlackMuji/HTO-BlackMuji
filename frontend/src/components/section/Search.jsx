@@ -57,7 +57,6 @@ const Search = () => {
                             {users.map((user) => (
                                 <p key={user.user_id}>{user.user_id}</p>
                             ))}
-                            
                         </span>
                         <img src={arrowIcon} alt="arrow_icon" className="arrow-icon" />
                     </button>
