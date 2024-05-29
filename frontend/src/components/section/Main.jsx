@@ -1,11 +1,9 @@
 import React from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import Header from './Header';
+import Search from './Search';
+import Footer from './Footer';
 
-import Header from './Header'
-import Footer from './Footer'
-import Search from './Search'
-
-// props 속성을 전달
 const Main = (props) => {
     return (
         <HelmetProvider>
@@ -18,17 +16,16 @@ const Main = (props) => {
                 <meta name="description" content={props.description} />
             </Helmet>
 
-            <Header />
+            <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
+                <Search />
+            </div>
+            <Header id="header" />
             <main id="main_dash" role="main">
-                <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
-                    <Search />
-                </div>
                 {props.children}
             </main>
-            <div style={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 100 }}>
-                <Footer />
-            </div>
+            <Footer id="footer" />
         </HelmetProvider>
     )
 }
+
 export default Main;
