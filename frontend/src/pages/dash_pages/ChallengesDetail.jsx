@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Main from '../../components/section/Main'
 import '../../css/ChallengeDetail.scss';
 
@@ -36,7 +36,12 @@ const ChallengeDetail = () => {
   return (
     <Main title={`문제 ${title}`} description={`문제 ${title} 내용`}>
       <div className='challenge-detail'>
-        <h2>{title}</h2>
+        <div className="back-btn-container">
+          <Link to='/Challenges'>
+            <button className='back-btn'></button>
+          </Link>
+          <h2>{title}</h2>
+        </div>
         <div className='prob-detail'>
           <p>{content[currentIndex]}</p> {/* 문제 내용 출력 */}
           <input
