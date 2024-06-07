@@ -36,7 +36,7 @@ const Challenges = () => {
 
   return (
     <Main title="Challenges" description="Challenges 화면입니다.">
-      <h2>문제 목록</h2>
+      <h2 style={{margin:20 }}>문제 목록</h2>
       <ul className='Challenge-list'>
         {challenges.map((challenge) => (
           <li key={challenge.id}>
