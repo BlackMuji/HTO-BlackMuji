@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { useLocation } from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -12,6 +13,9 @@ import Exp from '../contents/Exp';
 
 // props 속성을 전달
 const Main = (props) => {
+  const location = useLocation();
+  const isMainPath = location.pathname === '/main';
+
   return (
     <HelmetProvider>
       <Helmet
@@ -24,18 +28,21 @@ const Main = (props) => {
       </Helmet>
 
       <Header />
+
       <main id="main_dash" role="main">
         <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
           <Search />
         </div>
-        <div className="banner-container">
-          <Banner />
-          <Rank />
-          <Exp />
-        </div>
-        
+        {isMainPath && (
+          <div className="banner-container">
+            <Banner />
+            <Rank />
+            <Exp />
+          </div>
+        )}
         {props.children}
       </main>
+
       <div style={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 100 }}>
         <Footer />
       </div>
