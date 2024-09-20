@@ -36,8 +36,10 @@ const Main = (props) => {
         {isMainPath && (
           <div className="banner-container">
             <Banner />
-            <Rank />
-            <Exp />
+            <div className="rank-exp-container">
+              <Rank />
+              <Exp />
+            </div>
           </div>
         )}
         {props.children}
