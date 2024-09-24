@@ -1,49 +1,69 @@
 .rank-table-container {
-  width: 50%;
   font-family: Arial, sans-serif;
-}
+  border-color: white;
+  border-radius: 5px;
 
-.ranking-title {
-  text-align: center;
-  font-size: 1.6em;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
+  .rank-title {
+    text-align: center;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
 
-.rank-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+  .rank-table {
+    width: 100%;
+    border-collapse: collapse;
+    line-height: 1.5;
+    text-indent: 5px;
+  }
 
-.rank-table th, .rank-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center; 
-  vertical-align: middle; 
-}
+  .rank-table thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+    background-color: aliceblue;
+  }
+  
+  .rank-table tbody {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: black;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+  }
+  
+  .rank-table td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+  }
 
-.rank-table th {
-  background-color: #bb4a4a;
-  font-weight: bold;
-}
+  .rank-col {
+    width: 10%;
+    text-align: center;
+  }
 
-.rank-col {
-  width: 10%; /* Rank 열의 너비 설정 */
-}
+  .user-col {
+    width: 60%;
 
-.user-col {
-  width: 60%; /* User 열의 너비 설정 */
-}
+  }
 
-.points-col {
-  width: 30%; /* Points 열의 너비 설정 */
-}
+  .points-col {
+    width: 30%;
 
-.rank-table .large {
-  font-size: 1em;
-  background-color: #471414;
-}
+  }
 
-.rank-table .small {
-  font-size: 0.7em;
+  .rank-table .large {
+    font-size: 1.2em;
+  }
+
+  .rank-table .small {
+    font-size: 1em;
+  }
+
 }

@@ -23,7 +23,8 @@ router.get('/', auth, async (req, res) => {
         user_id: user.user_id,
         email: user.email,
         name: user.name,
-        date: user.date
+        date: user.date,
+        exp: user.exp
     })
 });
 

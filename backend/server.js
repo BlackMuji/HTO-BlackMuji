@@ -28,6 +28,7 @@ app.use('/api/post', require('./routes/api/post'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/create', require('./routes/api/createInst'));
 app.use('/api/challenge', require('./routes/api/challenge'));
+app.use('/api/exp', require('./routes/api/exp'));
 
 const PORT = process.env.PORT || 5000;
 

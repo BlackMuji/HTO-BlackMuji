@@ -11,7 +11,7 @@ const Rank = () => {
 
   return (
     <div className="rank-table-container">
-      <div className="ranking-title">Ranking</div>
+      <div className="rank-title">Ranking</div>
       <table className="rank-table">
         <thead>
           <tr>
