@@ -1,5 +1,10 @@
 import { validationResult } from 'express-validator';
+import gravatar from 'gravatar';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import User from '../model/User.js';
+import config from 'config';
+
 
 export const getAllUser = async (req, res) => {
     try {
@@ -114,7 +119,8 @@ export const postLoginUser = async (req, res) => {
             }
         }
         //토큰을 생성하여 쿠키에 저장
-        token = jwt.sign(payload, config.get('jswtSecret'), { expiresIn: 7200 })
+        const token = jwt.sign(payload, config.get('jswtSecret'), { expiresIn: 7200 });
+        
         user.token = token;
         user.save();
 

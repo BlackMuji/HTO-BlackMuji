@@ -16,7 +16,7 @@ const Search = () => {
     };
 
     useEffect(()=>{
-        fetch('http://localhost:5000/api/auth', {
+        fetch('http://localhost:5000/api/user/check-login', {
             method:'GET',
             credentials: "include"
         })
