@@ -7,11 +7,12 @@ const Rankings = () => {
 
     // 유저 데이터를 가져오는 useEffect
     useEffect(() => {
-        fetch('http://localhost:5000/api/user', {
+        fetch('http://localhost:5000/api/user/', {
             method: 'GET',
             credentials: "include"
         })
             .then((res) => res.json())
+            
             .then(res => {
                 // 경험치(exp) 기준으로 내림차순 정렬
                 const sortedRankings = res.sort((a, b) => b.exp - a.exp);

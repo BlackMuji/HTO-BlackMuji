@@ -28,7 +28,7 @@ const UpChallenge = () => {
     event.preventDefault();
   
     try {
-      const response = await fetch('http://localhost:5000/api/challenge', {
+      const response = await fetch('http://localhost:5000/api/prob/post-prob', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

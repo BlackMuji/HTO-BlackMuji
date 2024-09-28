@@ -8,7 +8,7 @@ const Challenges = () => {
   const [challenges, setChallenges] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/challenge', {
+    fetch('http://localhost:5000/api/prob/', {
       method: 'GET',
       credentials: "include"
     })
@@ -21,7 +21,7 @@ const Challenges = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this challenge?')) {
-      const response = await fetch(`http://localhost:5000/api/challenge/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/prob/get-prob/${id}`, {
         method: 'DELETE',
         credentials: "include"
       });

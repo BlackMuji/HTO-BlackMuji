@@ -25,7 +25,7 @@ function RegisterForm() {
     e.preventDefault();
 
     // POST 요청 보내기
-    fetch('http://localhost:5000/api/user', {
+    fetch('http://localhost:5000/api/user/sign-up', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

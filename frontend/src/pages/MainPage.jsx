@@ -29,7 +29,7 @@ const MainPage = () => {
     e.preventDefault();
 
     // POST 요청 보내기
-    fetch('http://localhost:5000/api/auth', {
+    fetch('http://localhost:5000/api/user/login', {
       method: 'POST',
       credentials: "include",
       headers: {
