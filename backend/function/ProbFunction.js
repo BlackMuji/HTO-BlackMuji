@@ -1,7 +1,7 @@
 import Example from '../model/Example.js';
 import Counter from '../model/Counter.js';
 
-
+// 문제 번호 할당
 const getNextSequence = async (name) => {
     const counter = await Counter.findOneAndUpdate(
         { name },
@@ -11,6 +11,7 @@ const getNextSequence = async (name) => {
     return counter.seq;
 };
 
+// 문제 업로드 POST
 export const postProb = async (req, res) => {
     try {
         const { title, content, answer, theme } = req.body;
@@ -24,6 +25,7 @@ export const postProb = async (req, res) => {
     }
 };
 
+// 전체 문제 GET
 export const getAllProb = async (req, res) => {
     try {
         const challenges = await Example.find({});
@@ -43,11 +45,13 @@ export const getAllProb = async (req, res) => {
     }
 };
 
+// 문제 GET
 export const getProb = async (req, res) => {
     const challenge = await Example.findOne({ numericId: req.params.numericId });
     res.json(challenge);
 };
 
+// 문제 삭제 DELETE
 export const deleteProb = async (req, res) => {
     try {
         const { numericId } = req.params;
@@ -64,6 +68,7 @@ export const deleteProb = async (req, res) => {
     }
 };
 
+// 머신 업로드 POST
 export const postMachine = async (req, res) => {
     console.log('Request body:', req.body);
 

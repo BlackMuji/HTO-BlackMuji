@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import User from '../model/User.js';
 import config from 'config';
 
-
+// 전체 회원 정보 GET
 export const getAllUser = async (req, res) => {
     try {
         const users = await User.find({});
@@ -16,6 +16,7 @@ export const getAllUser = async (req, res) => {
     }
 };
 
+// 회원가입 POST
 export const postSignUp = async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
@@ -75,6 +76,7 @@ export const postSignUp = async (req, res) => {
     }
 };
 
+// 로그인 유저 GET
 export const getLoginUser = async (req, res) => {
     const user = await User.findById(req.user.id).select('-password');
 
@@ -87,6 +89,7 @@ export const getLoginUser = async (req, res) => {
     })
 };
 
+// 로그인 POST
 export const postLoginUser = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
