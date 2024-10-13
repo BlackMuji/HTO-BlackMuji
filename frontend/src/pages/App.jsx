@@ -10,8 +10,10 @@ import Main from '../components/section/Main';
 const Challenges = lazy(() => import('./dash_pages/Challenges'));
 const ChallengeDetail = lazy(() => import('./dash_pages/ChallengesDetail'));
 const UpChallenge = lazy(() => import('./dash_pages/UpChallenge'));
+const UpMachine = lazy(() => import('./dash_pages/UpMachine'));
 const Rankings = lazy(() => import('./dash_pages/Rankings'));
-const Contest = lazy(() => import('./dash_pages/Contest'));
+const Machine = lazy(() => import('./dash_pages/Machine'));
+const MachineDetail = lazy(() => import('./dash_pages/MachineDetail'));
 
 // 새로운 App 구성
 const App = () => {
@@ -25,8 +27,11 @@ const App = () => {
           <Route path="/Challenges" element={<Challenges />} />
           <Route path="/Challenge/:id" element={<ChallengeDetail />} />
           <Route path="/Upload" element={<UpChallenge />} />
+          <Route path="/Upmachine" element={<UpMachine />} />
           <Route path="/Rankings" element={<Rankings />} />
-          <Route path="/Contest" element={<Contest />} />
+          <Route path="/Machine" element={<Machine />} />
+          <Route path="/Machine/:machineName" element={<MachineDetail />} />
+          <Route path="/Machine/:machineName/:tabName" element={<MachineDetail />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -1,5 +1,6 @@
 import Example from '../model/Example.js';
 import Counter from '../model/Counter.js';
+import Machine from '../model/Machine.js';
 
 // 문제 번호 할당
 const getNextSequence = async (name) => {
@@ -80,5 +81,26 @@ export const postMachine = async (req, res) => {
     } catch (error) {
         console.error('Error creating machine:', error);
         res.status(500).send('Server error');
+    }
+};
+
+// name이 "TEST"인 Machine 데이터 GET
+export const getMachine = async (req, res) => {
+    try {
+        // name이 'TEST'인 Machine 찾기
+        const machine = await Machine.findOne({ name: 'TEST' });
+
+        if (!machine) {
+            return res.status(404).json({ message: 'Machine not found', success: false });
+        }
+
+        // 성공적으로 찾았을 경우
+        res.json({
+            success: true,
+            data: machine
+        });
+    } catch (err) {
+        console.error('Error fetching machine data:', err);
+        res.status(500).json({ message: 'Server error', success: false });
     }
 };
