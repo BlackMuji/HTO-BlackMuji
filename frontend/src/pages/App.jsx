@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from './MainPage';
 import RegisterForm from './RegisterForm';
 import Main from '../components/section/Main';
+import InstancesPage from './InstancesPage';
+import MachinesPage from './MachinesPage';
 
 // 비동기 로딩을 위한 Lazy 컴포넌트
 const Challenges = lazy(() => import('./dash_pages/Challenges'));
@@ -32,6 +34,8 @@ const App = () => {
           <Route path="/Machine" element={<Machine />} />
           <Route path="/Machine/:machineName" element={<MachineDetail />} />
           <Route path="/Machine/:machineName/:tabName" element={<MachineDetail />} />
+          <Route path="/Instances" element={<InstancesPage />} />
+          <Route path="/Machines" element={<MachinesPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
