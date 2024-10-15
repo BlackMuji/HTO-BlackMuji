@@ -3,6 +3,10 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import Main from '../../components/section/Main'
 import { getMachine } from '../../api/axiosInstance';
 import '../../css/MachineDetail.scss';
+import emptyStar from '../../images/empty_star.png'; // 경로를 맞춰주세요
+import halfStar from '../../images/half_star.png'; // 경로를 맞춰주세요
+import fullStar from '../../images/full_star.png'; // 경로를 맞춰주세요
+
 
 const MachineDetail = () => {
   const { machineName, tabName } = useParams();
@@ -30,6 +34,32 @@ const MachineDetail = () => {
     navigate(`/machine/${machineName}/${newTabName}`); // 경로 변경 (탭 변경 시)
   };
 
+  const renderStars = (repute) => {
+    const stars = [];
+
+    // 정수 부분과 소수 부분 구분
+    const fullStars = Math.floor(repute);
+    const hasHalfStar = repute % 1 !== 0;
+
+    // full stars 추가
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<img key={`full-${i}`} src={fullStar} alt="Full Star" />);
+    }
+
+    // half star 추가
+    if (hasHalfStar) {
+      stars.push(<img key="half" src={halfStar} alt="Half Star" />);
+    }
+
+    // empty stars 추가 (최대 5개)
+    const remainingStars = 5 - stars.length;
+    for (let i = 0; i < remainingStars; i++) {
+      stars.push(<img key={`empty-${i}`} src={emptyStar} alt="Empty Star" />);
+    }
+
+    return stars;
+  };
+
   return (
     <Main title={`Machine: ${machineName}`} description="Machine 상세 정보 화면">
       <div className='machine-main'>
@@ -50,7 +80,10 @@ const MachineDetail = () => {
                 </div>
                 <div className='exp-repute'>
                   <p className='machine-exp'>EXP: {machineData.data.exp}</p>
-                  <p className='machine-repute'>Repute: {machineData.data.repute}</p>
+                  <div className='repute-star-container'>
+                    <div className='star-image'>{renderStars(machineData.data.repute)}</div>
+                    <p className='machine-repute'>Repute: {machineData.data.repute}</p>
+                  </div>
                 </div>
               </div>
             </div>
