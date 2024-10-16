@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import Main from '../../components/section/Main'
-import { getMachine } from '../../api/axiosInstance';
-import '../../css/MachineDetail.scss';
-import emptyStar from '../../images/empty_star.png'; // 경로를 맞춰주세요
-import halfStar from '../../images/half_star.png'; // 경로를 맞춰주세요
-import fullStar from '../../images/full_star.png'; // 경로를 맞춰주세요
+import { getMachineDetails } from '../../api/axiosInstance';
+import '../../css/ContestDetail.scss';
+import emptyStar from '../../images/empty_star.png';
+import halfStar from '../../images/half_star.png';
+import fullStar from '../../images/full_star.png';
 
 
 const MachineDetail = () => {
-  const { machineName, tabName } = useParams();
+  const { machineName, tabName } = useParams(); // URL에서 name과 tabName 추출
   const [machineData, setMachineData] = useState();
   const navigate = useNavigate();
 
@@ -17,10 +17,10 @@ const MachineDetail = () => {
   useEffect(() => {
     const getMachineData = async () => {
       try {
-        const data = await getMachine(machineName);
-        setMachineData(data);
+        const { machine } = await getMachineDetails(machineName); // 백엔드에서 machine 객체 받기
+        setMachineData(machine);
       } catch (err) {
-        console.error('Error fetching challenges:', err.message || err);
+        console.error('Error fetching machine details:', err.message || err);
       }
     };
 
@@ -31,7 +31,7 @@ const MachineDetail = () => {
   useEffect(() => { }, [tabName]);
 
   const handleTabClick = (newTabName) => {
-    navigate(`/machine/${machineName}/${newTabName}`); // 경로 변경 (탭 변경 시)
+    navigate(`/Contest/${machineName}/${newTabName}`); // 경로 변경 (탭 변경 시)
   };
 
   const renderStars = (repute) => {
@@ -75,14 +75,14 @@ const MachineDetail = () => {
                 {/* 상단 정보 (이름, 카테고리, EXP, 평점) */}
                 <div className='machine-image'></div>
                 <div className='name-category'>
-                  <p className='machine-name'>{machineData.data.name}</p>
-                  <p className='machine-category'>{machineData.data.category}</p>
+                  <p className='machine-name'>{machineData.name}</p>
+                  <p className='machine-category'>{machineData.category}</p>
                 </div>
                 <div className='exp-repute'>
-                  <p className='machine-exp'>EXP: {machineData.data.exp}</p>
+                  <p className='machine-exp'>EXP : {machineData.exp}</p>
                   <div className='repute-star-container'>
-                    <div className='star-image'>{renderStars(machineData.data.repute)}</div>
-                    <p className='machine-repute'>Repute: {machineData.data.repute}</p>
+                    <div className='star-image'>{renderStars(machineData.repute)}</div>
+                    <p className='machine-repute'>Repute : {machineData.repute}</p>
                   </div>
                 </div>
               </div>
@@ -110,31 +110,33 @@ const MachineDetail = () => {
                 </button>
               </div>
               {/* 탭에 따른 조건부 렌더링 */}
-              {tabName === 'information' && (
-                <div>
-                  <h2>Machine Information</h2>
-                  <p>{machineData.data.info}</p> {/* 머신의 정보 표시 */}
-                </div>
-              )}
+              <div className='detail-info'>
+                {tabName === 'information' && (
+                  <div>
+                    <h2>Machine Information</h2>
+                    <p>{machineData.info}</p> {/* 머신의 정보 표시 */}
+                  </div>
+                )}
 
-              {tabName === 'reviews' && (
-                <div>
-                  <h2>Reviews</h2>
-                  <ul>
-                    {machineData.data.reviews.map((review, index) => (
-                      <li key={index}>{review}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                {tabName === 'reviews' && (
+                  <div>
+                    <h2>Reviews</h2>
+                    <ul>
+                      {machineData.reviews.map((review, index) => (
+                        <li key={index}>{review}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-              {/* 기본 요약 정보 (탭이 없는 경우, /machine/:machineName 경로에 표시될 정보) */}
-              {!tabName && (
-                <div>
-                  <h2>Basic Overview</h2>
-                  <p>This is a summary of the {machineName} machine.</p>
-                </div>
-              )}
+                {/* 기본 요약 정보 (탭이 없는 경우, /machine/:machineName 경로에 표시될 정보) */}
+                {!tabName && (
+                  <div>
+                    <h2>Basic Overview</h2>
+                    <p>This is a summary of the {machineData.name} machine.</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ) : (

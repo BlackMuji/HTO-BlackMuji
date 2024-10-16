@@ -255,9 +255,9 @@ export const getAllMachines = async () => {
  * @param {string} machineId - The ID of the machine to retrieve.
  * @returns {Promise<Object>} - The response data containing machine details.
  */
-export const getMachineDetails = async (machineId) => {
+export const getMachineDetails = async (machineName) => {
   try {
-    const response = await axiosInstance.get(`/machines/${machineId}`);
+    const response = await axiosInstance.get(`/machines/${machineName}`);
     return response.data; // Return the data received from the server
   } catch (error) {
     throw error.response ? error.response.data : new Error('Failed to fetch machine details');

@@ -33,9 +33,9 @@ export const headerMenus = [
         src: "/Rankings"
     },
     {
-        title: "Machine",
+        title: "Contest",
         icon: <TiStopwatch />,
-        src: "/Machine"
+        src: "/Contest"
     },
     {
         title: "Machines",
