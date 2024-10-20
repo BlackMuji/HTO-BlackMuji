@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from 'express';
 import { body, validationResult } from 'express-validator';
 
 const validateMachine = [
@@ -20,12 +21,21 @@ const validateMachine = [
     .optional()
     .isInt({ min: 0 })
     .withMessage('Experience points must be a positive integer.'),
+  body('flag')
+    .notEmpty()
+    .withMessage('Flag is required.')
+    .isString()
+    .withMessage('Flag must be a string.')
+    .isLength({ min: 5 })
+    .withMessage('Flag must be at least 5 characters long.'),
+
   // Add more validations as needed
 
-  (req, res, next) => {
+  (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      res.status(400).json({ errors: errors.array() });
+      return;
     }
     next();
   },

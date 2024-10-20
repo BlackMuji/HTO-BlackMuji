@@ -53,7 +53,7 @@ export const signUpUser = async (formData) => {
 // 로그인 상태 확인
 export const getLoginUser = async () => {
   try {
-    const response = await axiosInstance.get('/user/check-login');
+    const response = await axiosInstance.get('/user/auth-status');
     return response.data; // 서버로부터 받은 데이터 반환
   } catch (error) {
     throw new Error('로그인 상태를 확인하는데 실패했습니다.');
@@ -255,9 +255,9 @@ export const getAllMachines = async () => {
  * @param {string} machineId - The ID of the machine to retrieve.
  * @returns {Promise<Object>} - The response data containing machine details.
  */
-export const getMachineDetails = async (machineName) => {
+export const getMachineDetails = async (machineId) => {
   try {
-    const response = await axiosInstance.get(`/machines/${machineName}`);
+    const response = await axiosInstance.get(`/machines/${machineId}`);
     return response.data; // Return the data received from the server
   } catch (error) {
     throw error.response ? error.response.data : new Error('Failed to fetch machine details');
