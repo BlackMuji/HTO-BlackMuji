@@ -1,5 +1,5 @@
-import Search from './header/Search';
-import Profile from './header/Profile';
+import Search from './content/Search';
+import Profile from './content/Profile';
 
 const SearchandProfile = () => {
     return (

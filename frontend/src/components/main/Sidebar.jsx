@@ -1,8 +1,8 @@
 // Sidebar.jsx
 import React from 'react';
-import { headerMenus, searchKeyword } from '../../data/header';
+import { headerMenus } from '../../data/header';
 import { Link, useLocation } from 'react-router-dom';
-import Logo from './header/Logo';
+import Logo from './content/Logo';
 
 const Sidebar = () => {
   const location = useLocation();
