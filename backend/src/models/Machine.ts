@@ -1,4 +1,16 @@
 import mongoose from 'mongoose';
+// Hint Schema
+const HintSchema = new mongoose.Schema({
+    content: {
+      type: String,
+      required: true
+    },
+    cost: {
+      type: Number,
+      required: true,
+      default: 1 // Cost in terms of reward reduction
+    }
+  });
 
 // Review Schema
 const ReviewSchema = new mongoose.Schema({
@@ -43,33 +55,49 @@ const MachineSchema = new mongoose.Schema({
     },
     exp: {
         type: Number,
-        required: true
+        required: true,
+        default: 50
     },
-    amiId: { // New field for AMI ID
+    contestExp: { // New field for Contest EXP
+        type: Number,
+        required: true,
+        default: 100
+    },
+    amiId: { 
         type: String,
         required: true,
         unique: true
     },
-    flag: { // New field for Flag
+    flag: { 
         type: String,
         required: true
     },
-    repute: {
+    rating: {
         type: Number,
-        default: 0.0 // Average rating
+        default: 1.0
     },
-    reviews: [ReviewSchema]
+    playerCount: {
+        type: Number,
+        default: 0
+    },
+    reviews: [ReviewSchema],
+    hints: [HintSchema],
+    isActive: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
 }, {
     timestamps: true
 });
 
 // Function to update average repute after adding a review
-MachineSchema.methods.updateRepute = function() {
+MachineSchema.methods.updateRating = function() {
     if (this.reviews.length === 0) {
-        this.repute = 0.0;
+        this.rating = 0.0;
     } else {
         const totalRating = this.reviews.reduce((sum, review) => sum + review.rating, 0);
-        this.repute = totalRating / this.reviews.length; // Calculate average rating
+        this.rating = totalRating / this.reviews.length; // Calculate average rating
     }
     return this.save();
 };

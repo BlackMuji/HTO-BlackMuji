@@ -1,37 +1,101 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-// 기존 컴포넌트
-import LoginPage from './pages/LoginPage';
-import MainPage from './pages/MainPage';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from './contexts/AuthContext';
+import LoginPage from './pages/public/LoginPage';
+import MainPage from './pages/public/MainPage';
+import LoadingPage from './pages/public/LoadingPage';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 
 // 비동기 로딩을 위한 Lazy 컴포넌트
-const RankingPage = lazy(() => import('./pages/RankingPage'));
-const ContestPage = lazy(() => import('./pages/ContestPage'));
-const ContestDetail = lazy(() => import('./components/contest/ContestDetail'));
+const LeaderBoardPage = lazy(() => import('./pages/leaderboard/LeaderBoardPage'));
+const ContestListPage = lazy(() => import('./pages/contest/ContestListPage'));
 const InstancesPage = lazy(() => import('./pages/InstancesPage'));
-const MachinesPage = lazy(() => import('./pages/MachinesPage'));
-const MyPage = lazy(() => import('./pages/MyPage'));
+const MachineListPage = lazy(() => import('./pages/machine/MachineListPage'));
+const MachineDetailPage = lazy(() => import('./pages/machine/MachineDetailPage'));
+const MachineRegisterPage = lazy(() => import('./pages/machine/MachineRegisterPage'));
+const MachinePlayPage = lazy(() => import('./pages/machine/MachinePlayPage'));
+const MyPage = lazy(() => import('./pages/user/MyPage'));
 
 // 새로운 App 구성
 const App = () => {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<MainPage />}>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/Rankings" element={<RankingPage />} />
-          <Route path="/Contest" element={<ContestPage />} />
-          <Route path="/Contest/:machineName" element={<ContestDetail />} />
-          <Route path="/Contest/:machineName/:tabName" element={<ContestDetail />} />
-          <Route path="/Instances" element={<InstancesPage />} />
-          <Route path="/Machines" element={<MachinesPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <AuthProvider>
+      <Router>
+        <Suspense fallback={<LoadingPage />}>
+          <Routes>
+            {/* Public Routes */}
+          <Route path="/login" element={ <LoginPage />} />
+
+            {/* Protected Routes */}
+          <Route
+            path="/" 
+            element={
+              <ProtectedRoute>
+                <MainPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/leaderboard" 
+            element={
+              <ProtectedRoute>
+                <LeaderBoardPage />
+              </ProtectedRoute>
+            } 
+          />    
+          <Route path="/contest" 
+            element={
+              <ProtectedRoute>
+                <ContestListPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/instances" 
+            element={
+              <ProtectedRoute>
+                <InstancesPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/machines" 
+            element={
+              <ProtectedRoute>
+                <MachineListPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/machine/register" 
+            element={
+              <ProtectedRoute>
+                <MachineRegisterPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/machine/:machineId" 
+            element={
+              <ProtectedRoute>
+                <MachineDetailPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/machine/:machineId/play" 
+            element={
+              <ProtectedRoute>
+                <MachinePlayPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/mypage" 
+            element={
+              <ProtectedRoute>
+                <MyPage />
+              </ProtectedRoute>
+            } 
+          />
+          </Routes>
+        </Suspense>
+      </Router>
+    </AuthProvider>
   );
 };
 

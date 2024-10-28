@@ -14,27 +14,27 @@ export const headerMenus = [
     {
         title: "Tutorial",
         icon: <CiReceipt />,
-        src: "/Tutorial"
+        src: "/tutorial"
     },
     {
-        title: "Rankings",
+        title: "Leaderboard",
         icon: <CiRouter />,
-        src: "/Rankings"
+        src: "/leaderboard"
     },
     {
         title: "Contest",
         icon: <TiStopwatch />,
-        src: "/Contest"
+        src: "/contest"
     },
     {
         title: "Machines",
         icon: < PiComputerTower />,
-        src: "/Machines"
+        src: "/machines"
     },
     {
         title: "Instances",
         icon: <GrCloudComputer />,
-        src: "/Instances"
+        src: "/instances"
     }
 ];
 

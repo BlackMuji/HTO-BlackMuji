@@ -11,9 +11,12 @@ const axiosInstance = axios.create({
 });
 
 
-// ------- 유저 관련 함수 ------
+// ------- User related ------
 
-// 모든 사용자 데이터 가져오기
+/**
+ * Get all user data.
+ * @returns {Promise<Object>} - The response data containing all user data.
+ */
 export const getAllUser = async () => {
   try {
     const response = await axiosInstance.get('/user/');
@@ -23,25 +26,58 @@ export const getAllUser = async () => {
   }
 };
 
-// 로그인 요청 함수
+/**
+ * Get user Detail
+ * @returns {Promise<Object>} - The response data containing user detail.
+ */
+export const getUserDetail = async () => {
+  try {
+    const response = await axiosInstance.get('/user/detail');
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch user detail');
+  }
+};
+
+/**
+ * Get user Detail by user_id(Admin Only)
+ * @param {string} user_id - The user_id to get user detail.
+ * @returns {Promise<Object>} - The response data containing user detail.
+ * Admin only
+*/
+export const getUserDetailByUserId = async (user_id) => {
+  try {
+    const response = await axiosInstance.get(`/user/detail/${user_id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch user detail');
+  }
+};
+
+/**
+ * Login request function.
+ * @param {Object} formData - The form data for login.
+ * @returns {Promise<Object>} - The response data containing login status.
+ */
 export const loginUser = async (formData) => {
   try {
-    // 로그인 API로 POST 요청 보내기
     const response = await axiosInstance.post('/user/login', formData);
-    return response.data; // 성공 시 데이터 반환
+    return response.data;
   } catch (error) {
     throw error.response ? error.response.data : new Error('Login failed');
   }
 };
 
-// 회원가입 요청 함수
+/**
+ * Sign up request function.
+ * @param {Object} formData - The form data for sign up.
+ * @returns {Promise<Object>} - The response data containing sign up status.
+ */
 export const signUpUser = async (formData) => {
   try {
-    // 회원가입 API로 POST 요청 보내기
     const response = await axiosInstance.post('/user/sign-up', formData);
-    return response.data; // 성공 시 데이터 반환
+    return response.data; 
   } catch (error) {
-    // 에러 처리
     if (error.response && error.response.data && error.response.data.message) {
       throw new Error(error.response.data.message);
     } else {
@@ -50,16 +86,23 @@ export const signUpUser = async (formData) => {
   }
 };
 
-// 로그인 상태 확인
-export const getLoginUser = async () => {
+/**
+ * Check login status.
+ * @returns {Promise<Object>} - The response data containing login status.
+ */
+export const getUserStatus = async () => {
   try {
     const response = await axiosInstance.get('/user/auth-status');
-    return response.data; // 서버로부터 받은 데이터 반환
+    return response.data;
   } catch (error) {
     throw new Error('Failed to check login status');
   }
 };
 
+/**
+ * Logout user.
+ * @returns {Promise<Object>} - The response data confirming logout.
+ */
 export const logoutUser = async () => {
   try {
     const response = await axiosInstance.post('/user/logout');
@@ -69,6 +112,11 @@ export const logoutUser = async () => {
   }
 };
 
+/**
+ * Check password.
+ * @param {string} password - The password to check.
+ * @returns {Promise<Object>} - The response data confirming password check.
+ */
 export const checkPassword = async (password) => {
   try {
     const response = await axiosInstance.post('/user/my-page', { password });
@@ -78,14 +126,193 @@ export const checkPassword = async (password) => {
   }
 };
 
-export const changePassword = async (newPassword) => {
+/**
+ * Change password.
+ * @param {string} newPassword - The new password to change.
+ * @returns {Promise<Object>} - The response data confirming password change.
+ */
+export const changePassword = async (oldPassword, newPassword) => {
   try {
-    const response = await axiosInstance.post('/user/change-password', { password: newPassword });
+    const response = await axiosInstance.post('/user/change-password', { oldPassword, newPassword });
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : new Error('Password change failed');
   }
 };
+
+/**
+ * Change name.
+ * @param {string} newName - The new name to change.
+ * @returns {Promise<Object>} - The response data confirming name change.
+ */
+export const changeName = async (newName) => {
+  try {
+    const response = await axiosInstance.post('/user/change-name', { name: newName });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Name change failed');
+  }
+};
+
+/**
+ * Reset password.
+ * @param {string} user_id - The user_id to reset.
+ * @param {string} password - The new password to reset.
+ * @returns {Promise<Object>} - The response data confirming reset.
+ */
+export const resetPassword = async (user_id, password) => {
+  try {
+    const response = await axiosInstance.post(`/user/reset-password/${user_id}`, { password });
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to reset password');
+  }
+};
+
+/**
+ * Get user progress by user_id.
+ * @param {string} user_id - The user_id to get user progress.
+ * @returns {Promise<Object>} - The response data containing user progress.
+ * Admin only
+ */
+export const getUserProgressByUserId = async (user_id) => {
+  try {
+    const response = await axiosInstance.get(`/user/progress/${user_id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch user progress');
+  }
+};
+
+/**
+ * Get user progress.
+ * @returns {Promise<Object>} - The response data containing user progress.
+ */
+export const getUserProgress = async () => {
+  try {
+    const response = await axiosInstance.get('/user/progress');
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch user progress');
+  }
+};
+
+/**
+ * Add user exp.
+ * @param {number} exp - The exp to add.
+ * @returns {Promise<Object>} - The response data confirming exp addition.
+ * Admin only
+ */
+export const addUserExp = async (user_id, exp) => {
+  try {
+    const response = await axiosInstance.post(`/user/update/${user_id}/exp`, { exp });
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to add user exp');
+  }
+};
+
+/**
+ * Update user level.
+ * @param {number} level - The level to update.
+ * @returns {Promise<Object>} - The response data confirming level update.
+ * Admin only
+ */
+export const updateUserLevel = async (user_id, level) => {
+  try {
+    const response = await axiosInstance.post(`/user/update/${user_id}/level`, { level });
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to update user level');
+  }
+};
+
+/**
+ * Update user to admin.
+ * @param {string} AdminPassword - The admin password to update.
+ * @returns {Promise<Object>} - The response data confirming update.
+ */
+export const updateUsertoAdmin = async (AdminPassword) => {
+  try {
+    const response = await axiosInstance.post('/user/update/to-admin', { AdminPassword });
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to update user to admin');
+  }
+};
+
+/**
+ * Reset user progress.
+ * @param {string} password - The password to reset.
+ * @returns {Promise<Object>} - The response data confirming reset.
+ */
+export const resetUserProgress = async (password) => {
+  try {
+    const response = await axiosInstance.post('/user/reset', { password });
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to reset user progress');
+  }
+};
+
+/**
+ * Reset user progress by user_id.
+ * @param {string} user_id - The user_id to reset.
+ * @returns {Promise<Object>} - The response data confirming reset.
+ * Admin only
+ */
+export const resetUserProgressByUserId = async (user_id) => {
+  try {
+    const response = await axiosInstance.post(`/user/reset/${user_id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to reset user progress');
+  }
+};
+
+/**
+ * Get leaderboard.
+ * @returns {Promise<Object>} - The response data containing leaderboard.
+ */
+export const getLeaderboard = async () => {
+  try {
+    const response = await axiosInstance.get('/user/leaderboard');
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch leaderboard');
+  }
+};
+
+/**
+ * Delete user by user_id.
+ * @param {string} user_id - The user_id to delete.
+ * @returns {Promise<Object>} - The response data confirming deletion.
+ * Admin only
+ */
+export const deleteUserByUserId = async (user_id) => {  
+  try {
+    const response = await axiosInstance.delete(`/user/${user_id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to delete user');
+  }
+};
+
+/**
+ * Delete user.
+ * @param {string} password - The password to delete.
+ * @returns {Promise<Object>} - The response data confirming deletion.
+ */
+export const deleteUser = async (password) => {
+  try {
+    const response = await axiosInstance.delete('/user', { data: { password } });
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to delete user');
+  }
+};
+
+// ------- Instance related ------
 
 /**
  * Start a new EC2 instance with the specified machineId.
@@ -102,11 +329,27 @@ export const startInstance = async (machineId) => {
 };
 
 /**
- * Get details of all instances.
+ * Get details of all instances(Admin only)
+ * @returns {Promise<Object>} - The response data containing instance details.
+ * Admin only
  */
 export const getAllInstances = async () => {
   try {
     const response = await axiosInstance.get('/inst/');
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to fetch all instances');
+  }
+};
+
+/**
+ * Get details of all instances by machine.
+ * @param {string} machineId - The ID of the machine to get instances.
+ * @returns {Promise<Object>} - The response data containing instance details.
+ */
+export const getInstanceByMachine = async (machineId) => {
+  try {
+    const response = await axiosInstance.get(`/inst/${machineId}`);
     return response.data; // Return the data received from the server
   } catch (error) {
     throw error.response ? error.response.data : new Error('Failed to fetch instances');
@@ -129,13 +372,13 @@ export const getInstanceDetails = async (instanceId) => {
 
 /**
  * Submit a flag for a specific instance.
- * @param {string} instanceId - The ID of the instance.
+ * @param {string} machineId - The ID of the machine.
  * @param {string} flag - The flag to submit.
  * @returns {Promise<Object>} - The response data confirming submission.
  */
-export const submitFlag = async (instanceId, flag) => {
+export const submitFlag = async (machineId, flag) => {
   try {
-    const response = await axiosInstance.post(`/inst/${instanceId}/submit-flag`, { flag });
+    const response = await axiosInstance.post(`/inst/${machineId}/submit-flag`, { flag });
     return response.data; // Return the data received from the server
   } catch (error) {
     throw error.response ? error.response.data : new Error('Failed to submit flag');
@@ -176,6 +419,22 @@ export const receiveVpnIp = async (instanceId, vpnIp) => {
 };
 
 /**
+ * Download OpenVPN profile for a specific instance.
+ * @returns {Promise<Blob>} - The OpenVPN profile file blob.
+ */
+export const downloadOpenVPNProfile = async () => {
+  try {
+    const response = await axiosInstance.get(`/inst/download-ovpn`, {
+      responseType: 'blob', // Important for handling binary data
+    });
+    return response.data; // This is the blob
+  } catch (error) {
+    throw error.response?.data || new Error('Failed to download OpenVPN profile');
+  }
+};
+// ------- Machine related ------
+
+/**
  * Create a new machine.
  * @param {Object} machineData - The data of the machine to create.
  * @returns {Promise<Object>} - The response data containing the created machine.
@@ -192,6 +451,7 @@ export const createMachine = async (machineData) => {
 /**
  * Get all machines.
  * @returns {Promise<Object>} - The response data containing all machines.
+ * Admin only
  */
 export const getAllMachines = async () => {
   try {
@@ -203,9 +463,67 @@ export const getAllMachines = async () => {
 };
 
 /**
+ * Get active machines.
+ * @returns {Promise<Object>} - The response data containing active machines.
+ */
+export const getActiveMachines = async () => {
+  try {
+    const response = await axiosInstance.get('/machines/active');
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch active machines');
+  }
+};
+
+/**
+ * Get inactive machines.
+ * @returns {Promise<Object>} - The response data containing inactive machines.
+ * Admin only
+ */
+export const getInactiveMachines = async () => {
+  try {
+    const response = await axiosInstance.get('/machines/inactive');
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch inactive machines');
+  }
+};
+
+/**
+ * Activate a specific machine.
+ * @param {string} machineId - The ID of the machine to activate.
+ * @returns {Promise<Object>} - The response data confirming activation.
+ * Admin only
+ */
+export const activateMachine = async (machineId) => {
+  try {
+    const response = await axiosInstance.post(`/machines/${machineId}/active`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to activate machine');
+  }
+};
+
+/**
+ * Deactivate a specific machine.
+ * @param {string} machineId - The ID of the machine to deactivate.
+ * @returns {Promise<Object>} - The response data confirming deactivation.
+ * Admin only
+ */
+export const deactivateMachine = async (machineId) => {
+  try {
+    const response = await axiosInstance.post(`/machines/${machineId}/deactive`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to deactivate machine');
+  }
+};
+
+/**
  * Get details of a specific machine.
  * @param {string} machineId - The ID of the machine to retrieve.
  * @returns {Promise<Object>} - The response data containing machine details.
+ * Admin only
  */
 export const getMachineDetails = async (machineId) => {
   try {
@@ -217,10 +535,54 @@ export const getMachineDetails = async (machineId) => {
 };
 
 /**
+ * Get inactive machine details.
+ * @param {string} machineId - The ID of the machine to retrieve.
+ * @returns {Promise<Object>} - The response data containing machine details.
+ * Admin only
+ */
+export const getInactiveMachineDetails = async (machineId) => {
+  try {
+    const response = await axiosInstance.get(`/machines/inactive/${machineId}`);
+    return response.data; // Return the data received from the server
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch machine details');
+  }
+};
+
+/**
+ * Get active machine details.
+ * @param {string} machineId - The ID of the machine to retrieve.
+ * @returns {Promise<Object>} - The response data containing machine details.
+ */
+export const getActiveMachineDetails = async (machineId) => {
+  try {
+    const response = await axiosInstance.get(`/machines/active/${machineId}`);
+    return response.data; // Return the data received from the server
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch machine details');
+  }
+};
+
+/**
+ * Get machine status.
+ * @param {string} machineId - The ID of the machine to retrieve.
+ * @returns {Promise<Object>} - The response data containing machine status.
+ */
+export const getMachineStatus = async (machineId) => {
+  try {
+    const response = await axiosInstance.get(`/machines/${machineId}/status`);
+    return response.data; // Return the data received from the server
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch machine status');
+  }
+};
+
+/**
  * Update a specific machine.
  * @param {string} machineId - The ID of the machine to update.
  * @param {Object} updateData - The data to update.
  * @returns {Promise<Object>} - The response data containing the updated machine.
+ * Admin only
  */
 export const updateMachine = async (machineId, updateData) => {
   try {
@@ -235,6 +597,7 @@ export const updateMachine = async (machineId, updateData) => {
  * Delete a specific machine.
  * @param {string} machineId - The ID of the machine to delete.
  * @returns {Promise<Object>} - The response data confirming deletion.
+ * Admin only
  */
 export const deleteMachine = async (machineId) => {
   try {
@@ -245,4 +608,391 @@ export const deleteMachine = async (machineId) => {
   }
 };
 
+/**
+ * Get machine hints.
+ * @param {string} machineId - The ID of the machine.
+ * @returns {Promise<Object>} - The response data containing machine hints.
+ */
+export const getMachineHints = async (machineId) => {
+  try {
+    const response = await axiosInstance.get(`/machines/${machineId}/hints`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch machine hints');
+  }
+};
+
+/**
+ * Submit a flag for a specific machine.
+ * @param {string} machineId - The ID of the machine.
+ * @param {string} flag - The flag to submit.
+ * @returns {Promise<Object>} - The response data confirming submission.
+ */
+export const submitFlagMachine = async (machineId, flag) => {
+  try {
+    const response = await axiosInstance.post(`/machines/${machineId}/submit-flag`, { flag });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to submit flag');
+  }
+};
+
+/**
+ * Post a machine review.
+ * @param {string} machineId - The ID of the machine.
+ * @param {Object} reviewData - The data of the review to post.
+ * @returns {Promise<Object>} - The response data containing the posted review.
+ */
+export const postMachineReview = async (machineId, reviewData) => {
+  try {
+    const response = await axiosInstance.post(`/machines/${machineId}/reviews`, reviewData);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to post machine review');
+  }
+};
+
+/**
+ * Update a machine review.
+ * @param {string} machineId - The ID of the machine.
+ * @param {string} reviewId - The ID of the review to update.
+ * @param {Object} updateData - The data to update.
+ * @returns {Promise<Object>} - The response data containing the updated review.
+ */
+export const updateMachineReview = async (machineId, reviewId, updateData) => {
+  try {
+    const response = await axiosInstance.put(`/machines/${machineId}/reviews/${reviewId}`, updateData);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to update machine review');
+  }
+};
+
+/**
+ * Delete a machine review.
+ * @param {string} machineId - The ID of the machine.
+ * @param {string} reviewId - The ID of the review to delete.
+ * @returns {Promise<Object>} - The response data confirming deletion.
+ */
+export const deleteMachineReview = async (machineId, reviewId) => {
+  try {
+    const response = await axiosInstance.delete(`/machines/${machineId}/reviews/${reviewId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to delete machine review');
+  }
+};
+
+/**
+ * Get a machine review by review ID.
+ * @param {string} machineId - The ID of the machine.
+ * @param {string} reviewId - The ID of the review to retrieve.
+ * @returns {Promise<Object>} - The response data containing the machine review.
+ */
+export const getMachineReview = async (machineId, reviewId) => {
+  try {
+    const response = await axiosInstance.get(`/machines/${machineId}/reviews/${reviewId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch machine review');
+  }
+};
+
+/**
+ * Get a machine rating.
+ * @param {string} machineId - The ID of the machine.
+ * @returns {Promise<Object>} - The response data containing the machine rating.
+ */
+export const getMachineRating = async (machineId) => {
+  try {
+    const response = await axiosInstance.get(`/machines/${machineId}/rating`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch machine rating');
+  }
+};  
+
+/**
+ * Get machine reviews.
+ * @param {string} machineId - The ID of the machine.
+ * @returns {Promise<Object>} - The response data containing machine reviews.
+ */
+export const getMachineReviews = async (machineId) => {
+  try {
+    const response = await axiosInstance.get(`/machines/${machineId}/reviews`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch machine reviews');
+  }
+};
+
+/**
+ * Delete a machine review forcefully.
+ * @param {string} machineId - The ID of the machine.
+ * @param {string} reviewId - The ID of the review to delete.
+ * @returns {Promise<Object>} - The response data confirming deletion.
+ * Admin only
+ */
+export const deleteMachineReviewForce = async (machineId, reviewId) => {
+  try {
+    const response = await axiosInstance.delete(`/machines/${machineId}/reviews/${reviewId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to delete machine review');
+  }
+};
+
+// ------- Contest related ------
+
+/**
+ * Get all contests.
+ * @returns {Promise<Object>} - The response data containing all contests.
+ * Admin only
+ */
+export const getContests = async () => {
+  try {
+    const response = await axiosInstance.get('/contest/');
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch contests');
+  }
+};
+
+/**
+ * Create a new contest.
+ * @param {Object} contestData - The data of the contest to create.
+ * @returns {Promise<Object>} - The response data containing the created contest.
+ */
+export const createContest = async (contestData) => {
+  try {
+    const response = await axiosInstance.post('/contest/', contestData);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to create contest');
+  }
+};
+
+/**
+ * Participate in a specific contest.
+ * @param {string} contestId - The ID of the contest.
+ * @param {string} machineId - The ID of the machine.
+ * @returns {Promise<Object>} - The response data confirming participation.
+ */
+export const participateInContest = async (contestId, machineId) => {
+  try {
+    const response = await axiosInstance.post(`/contest/${contestId}/participate`, { machineId });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to participate in contest');
+  }
+};
+
+/**
+ * Submit a flag for a specific machine in a contest.
+ * @param {string} contestId - The ID of the contest.
+ * @param {string} machineId - The ID of the machine.
+ * @param {string} flag - The flag to submit.
+ * @returns {Promise<Object>} - The response data confirming submission.
+ */
+export const submitFlagForContest = async (contestId, machineId, flag) => {
+  try {
+    const response = await axiosInstance.post(`/contest/${contestId}/submit-flag`, { machineId, flag });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to submit flag for contest');
+  }
+};
+
+/**
+ * Get hints for a specific machine in a contest.
+ * @param {string} contestId - The ID of the contest.
+ * @param {string} machineId - The ID of the machine.
+ * @returns {Promise<Object>} - The response data containing hints.
+ */
+export const getHintInContest = async (contestId, machineId) => {
+  try {
+    const response = await axiosInstance.get(`/contest/${contestId}/hints`, { machineId });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch hints for contest');
+  }
+};
+
+/**
+ * Update a specific contest.
+ * @param {string} contestId - The ID of the contest to update.
+ * @param {Object} updateData - The data to update.
+ * @returns {Promise<Object>} - The response data containing the updated contest.
+ * Admin only
+ */
+export const updateContest = async (contestId, updateData) => {
+  try {
+    const response = await axiosInstance.put(`/contest/${contestId}`, updateData);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to update contest');
+  }
+};
+
+/**
+ * Delete a specific contest.
+ * @param {string} contestId - The ID of the contest to delete.
+ * @returns {Promise<Object>} - The response data confirming deletion.
+ * Admin only
+ */
+export const deleteContest = async (contestId) => {
+  try {
+    const response = await axiosInstance.delete(`/contest/${contestId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to delete contest');
+  }
+};
+
+/**
+ * Get leaderboard by contest.
+ * @param {string} contestId - The ID of the contest.
+ * @returns {Promise<Object>} - The response data containing leaderboard.
+ */
+export const getLeaderboardByContest = async (contestId) => {
+  try {
+    const response = await axiosInstance.get(`/contest/${contestId}/leaderboard`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch leaderboard by contest');
+  }
+};
+
+/**
+ * Get contest status.
+ * @param {string} contestId - The ID of the contest.
+ * @returns {Promise<Object>} - The response data containing contest status.
+ */
+export const getContestStatus = async (contestId) => {
+  try {
+    const response = await axiosInstance.get(`/contest/${contestId}/status`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch contest status');
+  }
+};
+
+/**
+ * Get contest details.
+ * @param {string} contestId - The ID of the contest.
+ * @returns {Promise<Object>} - The response data containing contest details.
+ * Admin only
+ */
+export const getContestDetails = async (contestId) => {
+  try {
+    const response = await axiosInstance.get(`/contest/${contestId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch contest details');
+  }
+};
+
+/**
+ * Get user contest participation.
+ * @param {string} contestId - The ID of the contest.
+ * @returns {Promise<Object>} - The response data containing user contest participation.
+ */
+export const getUserContestParticipation = async (contestId) => {
+  try {
+    const response = await axiosInstance.get(`/contest/${contestId}/participate`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch user contest participation');
+  }
+};
+
+/**
+ * Activate a specific contest.
+ * @param {string} contestId - The ID of the contest.
+ * @returns {Promise<Object>} - The response data confirming activation.
+ * Admin only
+ */
+export const ActivateContest = async (contestId) => {
+  try {
+    const response = await axiosInstance.post(`/contest/${contestId}/active`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to activate contest');
+  }
+};
+
+/**
+ * Deactivate a specific contest.
+ * @param {string} contestId - The ID of the contest.
+ * @returns {Promise<Object>} - The response data confirming deactivation.
+ * Admin only
+ */
+export const DeactivateContest = async (contestId) => { 
+  try {
+    const response = await axiosInstance.post(`/contest/${contestId}/deactive`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to deactivate contest');
+  }
+};
+
+/**
+ * Get active contest details.
+ * @param {string} contestId - The ID of the contest.
+ * @returns {Promise<Object>} - The response data containing active contest details.
+ */
+export const getActiveContestDetails = async (contestId) => {
+  try {
+    const response = await axiosInstance.get(`/contest/active/${contestId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch active contest details');
+  }
+};
+
+/**
+ * Get all active contests.
+ * @returns {Promise<Object>} - The response data containing all active contests.
+ */
+export const getActiveContests = async () => {
+  try {
+    const response = await axiosInstance.get('/contest/active');
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch active contests');
+  }
+};
+
+/**
+ * Get all inactive contests.
+ * @returns {Promise<Object>} - The response data containing all inactive contests.
+ * Admin only
+ */
+export const getInactiveContests = async () => {
+  try {
+    const response = await axiosInstance.get('/contest/inactive');
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch inactive contests');
+  }
+};
+
+/**
+ * Get inactive contest details.
+ * @param {string} contestId - The ID of the contest.
+ * @returns {Promise<Object>} - The response data containing inactive contest details.
+ * Admin only
+ */
+export const getInactiveContestDetails = async (contestId) => {
+  try {
+    const response = await axiosInstance.get(`/contest/inactive/${contestId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Failed to fetch inactive contest details');
+  }
+};
+
+
+
 export default axiosInstance;
+
