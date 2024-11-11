@@ -123,25 +123,27 @@
       }
     }
 
-    .pagination {
-      display: flex;
-      align-items: center;
-      justify-content: center;
 
-      .page_number,
-      .page_button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  }
+}
 
-        width: 30px;
-        height: 30px;
-      }
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-      .page_button {
-        margin-left: 20px;
-        margin-right: 20px;
-      }
-    }
+  .page_number,
+  .page_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+  }
+
+  .page_button {
+    margin-left: 20px;
+    margin-right: 20px;
   }
 }
