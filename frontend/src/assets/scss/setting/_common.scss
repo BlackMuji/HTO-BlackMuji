@@ -9,8 +9,13 @@ body {
 }
 
 :root {
+	/* component size */
 	--sidebar-width: 350px;
 	--sidebar-collpased: 80px;
+
+	--container-width: 70vw;
+	--container-height: 80vh;
+
 
 	/* fonts */
 	--font-roboto: Roboto;
@@ -25,7 +30,7 @@ body {
 
 
 	/* Colors */
-	--color-list-background: #13151a;
+	--color-list-background: #13151ab3;
 	--color-list-border: #EEEEEE;
 	--colors-neutral-grey-900: #3a383f;
 	--color-white-200: #f7f3fd;
@@ -34,4 +39,5 @@ body {
 	--colors-others-color-blue-gray-200: #8ea6bf;
 	--color-gainsboro: #e3e3e4;
 	--color-gray-400: #88909f;
+	--color-red-rosso: #D10000;
 }
