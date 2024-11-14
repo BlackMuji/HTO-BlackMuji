@@ -8,6 +8,7 @@
     backdrop-filter: blur(40px);
     border-radius: 24px;
     background: var(--color-list-background);
+
     overflow-y: hidden;
 
     .contest_detail_page {
@@ -24,12 +25,11 @@
             height: 48px;
             box-shadow: 0px 2px 4px rgba(44, 39, 56, 0.08), 0px 4px 8px rgba(44, 39, 56, 0.08);
             border-radius: 6px;
-            background-color: #000;
+            background: linear-gradient(96.7deg, #222, #2cbc35);
             color: var(--color-white);
 
             &:hover {
-                background-color: var(--color-dimgray);
-                color: #000000;
+                background: linear-gradient(96.7deg, #80bc2c, #222);
             }
         }
     }

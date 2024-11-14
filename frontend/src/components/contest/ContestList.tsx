@@ -77,7 +77,7 @@ const ContestList: React.FC = () => {
                   <td className={styles.contest_end_time}>{contest.endTime ? formatDate(contest.endTime) : 'N/A'}</td>
                   <td className={styles.contest_reward}>{contest.contestExp}</td>
                   <td className={styles.contest_details}>
-                    <button className={styles.details_button} onClick={() => handleContestClick(contest._id)}><FaArrowRightToBracket size={24} /></button>
+                    <button className={styles.details_button} onClick={() => handleContestClick(contest._id)}><FaArrowRightToBracket size={24} color="white" /></button>
                   </td>
                 </tr>
               ))}

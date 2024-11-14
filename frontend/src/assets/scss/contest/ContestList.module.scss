@@ -16,7 +16,7 @@
         letter-spacing: -0.01em;
         font-weight: 600;
         font-family: var(--font-ibm-plex-sans);
-        color: #000;
+        color: var(--color-white);
         text-align: left;
         height: 62px;
     }
@@ -87,7 +87,7 @@
                 font-size: 18px;
                 letter-spacing: -0.01em;
                 font-weight: 600;
-                color: #292D32;
+                color: var(--color-white-200);
             }
 
             .contest_name,
@@ -114,6 +114,7 @@
 
             .contest_details {
                 justify-content: center;
+
                 .details_button {
                     width: 24px;
                     height: 24px;
@@ -128,14 +129,14 @@
     background-color: rgba(22, 192, 152, 0.38);
     border: 1px solid #00b087;
     box-sizing: border-box;
-    color: #008767 !important; 
+    color: #008767 !important;
     border-radius: 4px;
     font-size: 14px;
     padding: 4px 12px;
 }
 
 .inactive {
-    background-color:#ffc5c5;
+    background-color: #ffc5c5;
     border: 1px solid #DF0404;
     box-sizing: border-box;
     color: #DF0404 !important;
