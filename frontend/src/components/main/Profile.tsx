@@ -5,6 +5,9 @@ import { AuthUserContext } from '../../contexts/AuthUserContext';
 import styles from '../../assets/scss/section/_profile.module.scss';
 import { useProfileContext } from '../../contexts/ProfileContext';
 
+
+import { FaArrowRightToBracket } from "react-icons/fa6";
+
 import user_default from '../../assets/img/icon/profile_default.png';
 import down_arrow from '../../assets/img/icon/down_arrow.svg';
 import up_arrow from '../../assets/img/icon/up_arrow.svg';
@@ -97,7 +100,7 @@ const Profile: React.FC = () => {
                 </li>
                 <div className={styles.userinfoDarkChild} />
                 <div className={styles.logout}>
-                    <img className={styles.icon} alt="" src={arrow_left} />
+                    <FaArrowRightToBracket className={styles.logout_icon} size={30} />
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </div>
             </div>
