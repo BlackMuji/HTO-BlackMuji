@@ -1,2 +1,0 @@
-import{u as o,j as e,h as t}from"./index-CivGSquN.js";const i=()=>{const n=o(),a=()=>{n("/")};return e.jsx(t,{isOpen:!0,onClose:a,children:e.jsxs("div",{className:"machine-complete-modal",children:[e.jsx("h2",{children:"Congratulations!"}),e.jsx("p",{children:"You have completed the machine."}),e.jsx("button",{onClick:a,className:"redirect-button",children:"Go to Main Page"})]})})};export{i as default};
-//# sourceMappingURL=MachineCompletePage-C85noEWR.js.map

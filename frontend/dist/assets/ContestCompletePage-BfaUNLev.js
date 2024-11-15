@@ -1,2 +1,0 @@
-import{u as s,j as e,h as n}from"./index-CivGSquN.js";const l=()=>{const o=s(),t=()=>{o("/")};return e.jsx(n,{isOpen:!0,onClose:t,children:e.jsxs("div",{className:"contest-complete-modal",children:[e.jsx("h2",{children:"Congratulations!"}),e.jsx("p",{children:"You have completed the contest."}),e.jsx("button",{onClick:t,className:"redirect-button",children:"Go to Main Page"})]})})};export{l as default};
-//# sourceMappingURL=ContestCompletePage-BfaUNLev.js.map

@@ -50,7 +50,7 @@ const Profile: React.FC = () => {
         }
     };
     const avatarColorIndex = getAvatarColorIndex(currentUser?.username || '');
-    const avatarBgColor = avatarBackgroundColors[avatarColorIndex];
+    const avatarBgColor = avatarBackgroundColors[avatarColorIndex]; 
 
     return (
         <div className={styles.userinfoDark}>
@@ -73,41 +73,41 @@ const Profile: React.FC = () => {
                         <img className={styles.userinfoButtonIcon} alt="" src={isProfileCollapsed ? down_arrow : up_arrow} />
                     </div>
                 </div>
-            </div>
-            <div className={`${styles.userMenu} ${isProfileCollapsed ? styles.collapsed : styles.expanded}`}>
-                <li className={styles.settings}>
-                    <div className={styles.settingsInner}>
-                        <div className={styles.rectangleParent}>
-                            <img className={styles.icon} alt="" src={personal_info} />
-                            <MenuItem onClick={() => navigate('/mypage')}>개인정보 수정</MenuItem>
-                        </div>
-                    </div>
-                    <div className={styles.settingsInner}>
-                        <div className={styles.rectangleParent}>
-                            <img className={styles.icon} alt="" src={chat} />
-                            <div className={styles.dashboard}>Messages</div>
-                        </div>
-                    </div>
-                    <div className={styles.settingsInner}>
-                        <div className={styles.rectangleParent}>
-                            <img className={styles.icon} alt="" src={setting} />
-                            <div className={styles.lianaParker}>Settings</div>
-                        </div>
-                    </div>
-                    <div className={styles.settingsInner}>
-                        <div className={styles.rectangleParent}>
-                            <img className={styles.icon} alt="" src={darkmode_icon} />
-                            <div className={styles.darkModeParent}>
-                                <div className={styles.darkMode}>Dark mode</div>
+                <div className={`${styles.userMenu} ${isProfileCollapsed ? styles.collapsed : ''}`}>
+                    <li className={styles.settings}>
+                        <div className={styles.settingsInner}>
+                            <div className={styles.rectangleParent}>
+                                <img className={styles.icon} alt="" src={personal_info} />
+                                <MenuItem onClick={() => navigate('/mypage')}>개인정보 수정</MenuItem>
                             </div>
                         </div>
-                        <img className={styles.switchIcon} alt="" src={darkmode_switch} />
+                        <div className={styles.settingsInner}>
+                            <div className={styles.rectangleParent}>
+                                <img className={styles.icon} alt="" src={chat} />
+                                <div className={styles.dashboard}>Messages</div>
+                            </div>
+                        </div>
+                        <div className={styles.settingsInner}>
+                            <div className={styles.rectangleParent}>
+                                <img className={styles.icon} alt="" src={setting} />
+                                <div className={styles.lianaParker}>Settings</div>
+                            </div>
+                        </div>
+                        <div className={styles.settingsInner}>
+                            <div className={styles.rectangleParent}>
+                                <img className={styles.icon} alt="" src={darkmode_icon} />
+                                <div className={styles.darkModeParent}>
+                                    <div className={styles.darkMode}>Dark mode</div>
+                                </div>
+                            </div>
+                            <img className={styles.switchIcon} alt="" src={darkmode_switch} />
+                        </div>
+                    </li>
+                    <div className={styles.userinfoDarkChild} />
+                    <div className={styles.logout}>
+                        <img className={styles.icon} alt="" src={arrow_left} />
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </div>
-                </li>
-                <div className={styles.userinfoDarkChild} />
-                <div className={styles.logout}>
-                    <img className={styles.icon} alt="" src={arrow_left} />
-                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </div>
             </div>
         </div >
