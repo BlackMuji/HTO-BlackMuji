@@ -1,7 +1,6 @@
 .userinfoDark {
   width: var(--profile-width);
   position: relative;
-  border-radius: 20px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -101,8 +100,8 @@
     border-radius: 0 0 24px 24px;
 
     &.collapsed {
-      visibility: hidden; // 숨길 때 visibility를 사용
-      opacity: 0; // 투명도 변경으로 부드러운 전환
+      visibility: hidden;
+      opacity: 0;
     }
 
     &.expanded {
