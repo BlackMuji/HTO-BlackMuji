@@ -16,7 +16,6 @@ import setting from '../../assets/img/icon/setting_icon.svg';
 import personal_info from '../../assets/img/icon/personal_info.svg';
 import darkmode_icon from '../../assets/img/icon/darkmode_icon.svg';
 import darkmode_switch from '../../assets/img/icon/darkmode_switch.svg';
-import arrow_left from '../../assets/img/icon/Arrow-Left.svg';
 
 interface MenuItemProps {
     onClick?: () => void;
