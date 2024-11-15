@@ -1,0 +1,16 @@
+@use "../style" as *;
+
+.pre_contest_page {
+    @include background_set;
+    height: 2000px;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+
+    .contest_name{
+    }
+    
+    .contest_rules{
+        height: 2000px;
+    }
+}

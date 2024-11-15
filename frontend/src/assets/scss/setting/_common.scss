@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap');
 
+*{
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-gray-400) transparent;
+}
 
 body {
 	margin: 0;
@@ -16,6 +20,7 @@ body {
 	--container-width: 70vw;
 	--container-height: 80vh;
 
+	--profile-width: 360px;
 
 	/* fonts */
 	--font-roboto: Roboto;
@@ -30,7 +35,8 @@ body {
 
 
 	/* Colors */
-	--color-list-background: #13151ab3;
+	--color-background-transparent: #13151ab3;
+	--color-background: #13151a;
 	--color-list-border: #EEEEEE;
 	--colors-neutral-grey-900: #3a383f;
 	--color-white-200: #f7f3fd;
