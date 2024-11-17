@@ -6,8 +6,7 @@ import LeaderboardTable from '../../components/leaderboard/LeaderboardTable';
 import Main from '../../components/main/Main';
 import { User } from '../../types/User';
 import { CurrentUser } from '../../types/CurrentUser';
-
-
+import Loading from '../../components/public/Loading';
 
 /**
  * Component representing the LeaderBoard Page.
@@ -89,6 +88,10 @@ const LeaderBoardPage: React.FC = () => {
     };
     fetchMyRank();
   }, []);
+
+  if (loading) {
+    return <Main><Loading /></Main>;
+  }
 
   return (
     <Main title="LeaderBoard" description="LeaderBoard 화면입니다.">

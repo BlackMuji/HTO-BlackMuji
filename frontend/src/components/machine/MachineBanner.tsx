@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import { Paper, Button, Avatar } from '@mui/material';
 import { ArrowForwardIos, ArrowBackIos } from '@mui/icons-material';
 import { getAvatarColorIndex, avatarBackgroundColors } from '../../utils/avatars';
+import LoadingIcon from '../public/LoadingIcon';
 
 const MachineBanner: React.FC = () => {
   const [latestMachine, setLatestMachine] = useState<MachineforBanner | null>(null);
@@ -37,7 +38,7 @@ const MachineBanner: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading machine banners...</p>;
+    return <LoadingIcon />;
   }
 
   if (error) {
@@ -45,8 +46,8 @@ const MachineBanner: React.FC = () => {
   }
 
   const machines = [
-    { ...latestMachine!, title: 'Latest Machine' },
-    { ...mostPlayedMachine!, title: 'Most Played Machine' },
+    { ...latestMachine!, title: <><b>Latest Machine</b></> },
+    { ...mostPlayedMachine!, title: <><b>Most Played Machine</b></> },
   ];
 
   return (
@@ -88,28 +89,31 @@ const MachineBanner: React.FC = () => {
                 >
                   {machine.name.charAt(0).toUpperCase()}
                 </Avatar>
-                <h4>{machine.name}</h4>
+                <h4><b>{machine.name}</b></h4>
                 <p className='banner-category'>Category: {machine.category}</p>
                 <p className='banner-exp'>Rewards: {machine.exp} EXP</p>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    marginTop: '4px',
-                    width: '200px'
-                  }}
-                >
-                  <Rating
-                    name={`read-only-rating-${machine._id}`}
+                <p className='banner-played'>Played: {machine.playerCount}</p>
+                <div className='banner-rating'>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      marginTop: '4px',
+                      width: '150px'
+                    }}
+                  >
+                    <Rating
+                      name={`read-only-rating-${machine._id}`}
                     value={Number(machine.rating)}
+                    size='large'
                     precision={0.5}
                     readOnly
                   />
                   <span style={{ marginLeft: '8px', color: 'white' }}>{machine.rating.toFixed(1)}</span>
-                </Box>
-                <p>Played: {machine.playerCount}</p>
+                  </Box>
+                </div>
                 <Button
                   sx={{
-                    width: '200px',
+                    width: '170px',
                   }}
                   variant="contained"
                   color="primary"

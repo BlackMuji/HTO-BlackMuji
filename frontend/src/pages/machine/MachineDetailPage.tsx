@@ -6,6 +6,7 @@ import { getActiveMachineDetails, startPlayingMachine } from '../../api/axiosMac
 import { MachineDetail as MachineDetailType } from '../../types/Machine';
 import '../../assets/scss/machine/MachineDetailPage.scss';
 import MachineReviewList from '../../components/machine/MachineReviewList';
+import Loading from '../../components/public/Loading';
 
 /**
  * Component representing the Machine Detail Page.
@@ -68,9 +69,7 @@ const MachineDetailPage: React.FC = () => {
   if (isLoading) {
     return (
       <Main title="Machine Detail" description="Loading machine details.">
-        <div className="machine-detail-page loading">
-          <p>Loading...</p>
-        </div>
+        <Loading />
       </Main>
     );
   }
@@ -87,20 +86,25 @@ const MachineDetailPage: React.FC = () => {
 
   return (
     <Main title="Machine Detail" description="Machine Detail 화면입니다.">
-      <div className='machine-detail-page-container'>
+      <div className='machine-detail-container-page'>
         <div className="machine-detail-page">
-          <MachineDetail machineDetail={machineDetail} />
+          <div className="detail">
+            <MachineDetail machineDetail={machineDetail} />
+          </div>
           <button onClick={handlePlay} className="play-button">
             Play
           </button>
         </div>
         <div className='machine-detail-page-review'>
-          <MachineReviewList machineId={machineId || ''} />
-        </div>
-        <div className='machine-detail-page-new-review'>
-          <button onClick={handleRegisterReview} className='machine-detail-page-new-review-button'>
-            Add New Review
-          </button>
+          <div className='machine-review'>
+            <div className='machine-detail-page-new-review'>
+              <h3>Reviews</h3>
+              <button onClick={handleRegisterReview} className='machine-detail-page-new-review-button'>
+                Add New Review
+              </button>
+            </div>
+            <MachineReviewList machineId={machineId || ''} />
+          </div>
         </div>
       </div>
     </Main>

@@ -9,6 +9,7 @@ import ContestLeaderboard from '../../components/leaderboard/ContestLeaderboard'
 import { User } from '../../types/User';
 import { ContestStatus } from '../../types/Contest';
 import styles from '../../assets/scss/contest/ContestDetailPage.module.scss';
+import Loading from '../../components/public/Loading';
 
 /**
  * Component representing the Contest Detail Page.
@@ -146,11 +147,9 @@ const ContestDetailPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Main title="Contest Detail" description="Loading contest details.">
-        <div className="contest-detail-page loading">
-          <p>Loading...</p>
-        </div>
-      </Main>
+      <div className="contest-detail-page loading">
+        <Loading />
+      </div>
     );
   }
 

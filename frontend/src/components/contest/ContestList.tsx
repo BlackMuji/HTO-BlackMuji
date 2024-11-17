@@ -8,6 +8,7 @@ import { BsArrowRightCircle } from "react-icons/bs";
 
 import { Avatar } from '@mui/material';
 import { avatarUrls, avatarBackgroundColors, getAvatarIndex, getAvatarColorIndex } from '../../utils/avatars';
+import Loading from '../public/Loading';
 
 interface Contest {
   _id: string;
@@ -74,6 +75,11 @@ const ContestList: React.FC = () => {
         </tbody>
       );
     }
+
+    if (loading) {
+      return <Loading />;
+    }
+
     return (
       <tbody>
         {contestsToDisplay.map((contest) =>
@@ -108,7 +114,7 @@ const ContestList: React.FC = () => {
   };
 
   if (loading) {
-    return <p>Loading contests...</p>;
+    return <Loading />;
   }
 
   return (
