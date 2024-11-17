@@ -24,7 +24,7 @@
     .contest_basic_info {
         width: 100%;
         height: 170px;
-        background: linear-gradient(to bottom right, var(--blue-500), #64AFD080);
+        background: var(--gradient-container);
         border-radius: 30px;
         padding: 8px 30px 16px;
 
@@ -51,8 +51,8 @@
         gap: 16px;
 
         .contest_rules {
-            height: 300px;
-            font-size: 20px;
+            height: 100%;
+            font-size: var(--base-font-size);
             line-height: 1.6;
             display: flex;
             flex-direction: column;

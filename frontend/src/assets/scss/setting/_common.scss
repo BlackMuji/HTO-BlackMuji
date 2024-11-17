@@ -19,7 +19,9 @@ body {
 	--sidebar-collapsed: 80px;
 
 	--container-width: 70vw;
+	--container-min-width: 500px;
 	--container-height: 80vh;
+	--container-min-height: 700px;
 
 	--profile-width: 360px;
 
@@ -28,12 +30,11 @@ body {
 	--font-inter: Inter;
 	--font-ibm-plex-sans: 'IBM Plex Sans';
   	
-	/* font sizes */
-	--font-size-mid-5: 17.5px;
-	--font-roboto-size: 16px;
-	--font-size-21xl: 40px;
-	--font-size-5xl: 24px;
-
+	/* font sizes */							// * 다른 사이즈 이용하더라도 clamp 이용해서 페이지 축소 시 사이즈 글자 줄어들게 *
+	--base-font-size: clamp(16px, 1.8vw, 20px);	// 기본 사이즈
+	--font-size-large: clamp(28px, 3vw, 40px);	// 대
+	--font-size-mid: clamp(18px, 2vw, 24px);	// 중
+	--font-size-small: clamp(14px 1vw, 18px);	// 소
 
 	/* Colors */
 	--color-background-transparent: #071125;
@@ -55,4 +56,9 @@ body {
 	--color-gainsboro: #e3e3e4;
 	--color-gray-400: #88909f;
 	--color-red-rosso: #D10000;
+
+	/* Gradient Colors */
+	--gradient-container : linear-gradient(to bottom right, var(--blue-500), #64AFD080);
+	--gradient-button : linear-gradient(96.7deg, var(--blue-500), var(--blue-100));
+
 }
