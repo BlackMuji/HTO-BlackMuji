@@ -14,6 +14,19 @@ body {
 }
 
 :root {
+	/*
+	1. 부모 컨테이너 요소 사이즈 mixin에서 background_set 사용하기
+	2. 8배수로 공간 정리. 자식 요소간 공간 이격은 gap 사용. 작은 요소 8px, 큰 요소 16px, 필요 시 더 크게. (최대 40px)
+	ex) 타이틀 밑에 설명 텍스트 있을 경우 Padding-left 이용해서 8 or 16px 이격해서 텍스트 간 간격 구분되게 사용
+	3. 버튼 요소 mixin. button_color 사용하기
+	4. 테이블 요소 justify-content: space-around 사용. thead 요소들 width 랑 tbody 요소 width 맞춰서 위 아래 정렬시키기
+	5. font 들 아래 var 들 사용하기.
+	6. 색상은 전부 var로 관리. 추가 시 색상 어두울수록 숫자가 크게
+
+	!! 믹스인 최대한 활용 (재사용 잦은 경우 만들어서 넣어놓기) !!
+	/*
+
+
 	/* component size */
 	--sidebar-width: 350px;
 	--sidebar-collapsed: 80px;
@@ -59,7 +72,7 @@ body {
 	--color-red-rosso: #D10000;
 
 	/* Gradient Colors */
-	--gradient-container : linear-gradient(to bottom right, var(--blue-500), #64AFD080);
-	--gradient-button : linear-gradient(96.7deg, var(--blue-500), var(--blue-100));
+	--gradient-container : linear-gradient(to bottom right, var(--blue-500), #64AFD080); // 컨테이너 배경. ex)CurrentUserInfo 배경 그라데이션
+	--gradient-button : linear-gradient(96.7deg, var(--blue-500), var(--blue-100));		// 버튼 배경. ex) GO TO CONTEST 버튼
 
 }
