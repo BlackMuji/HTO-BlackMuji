@@ -3,9 +3,8 @@
   height: 120px;
   position: relative;
   display: flex;
-  backdrop-filter: blur(4px);
   border-radius: 24px 24px 0 0;
-  background: linear-gradient(to top right, var(--blue-500), #64AFD080);
+  background: linear-gradient(to bottom right, var(--blue-500), #64AFD080);
 
   justify-content: space-around;
   align-items: center;

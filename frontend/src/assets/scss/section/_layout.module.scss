@@ -47,7 +47,6 @@
     .props_container {
         position: relative;
         flex-grow: 1;
-        flex-shrink: 0;
         height: 100vh;
         padding-left: var(--sidebar-width);
         box-sizing: border-box;
@@ -57,7 +56,14 @@
         align-items: center;
         justify-content: flex-start;
         padding-top: 48px;
+        margin-bottom: 24px;
         z-index: 1;
+
+        scrollbar-width: none;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         &.collapsed {
             padding-left: var(--sidebar-collapsed);

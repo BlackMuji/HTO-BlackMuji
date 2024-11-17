@@ -2,14 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap');
 
-html{
-	scrollbar-width: thin;
-	scrollbar-color: var(--color-gray-400) transparent;
-}
-
 body {
 	margin: 0;
 	line-height: normal;
+	scrollbar-width: none;
+	scrollbar-color: var(--color-gray-400) transparent;
+	
+	&::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 :root {
