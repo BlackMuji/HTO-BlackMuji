@@ -92,8 +92,7 @@ const ContestList: React.FC = () => {
                   backgroundColor: avatarUrls[getAvatarIndex(contest.name)] ? avatarBackgroundColors[getAvatarColorIndex(contest.name)] : 'transparent',
                   width: 40,
                   height: 40,
-                }}
-              >
+                }}>
                 {avatarUrls[getAvatarIndex(contest.name)] && contest.name.charAt(0).toUpperCase()}
               </Avatar>{contest.name || 'N/A'}</td>
             <td className={styles.contest_start_time}>{contest.startTime ? formatDate(contest.startTime) : 'N/A'}</td>
