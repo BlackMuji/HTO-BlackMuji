@@ -43,17 +43,28 @@
       h4 {
         grid-column: 2 / -1;
         font-size: var(--font-size-large);
-        color: white;
+        color: var(--color-white);
       }
 
-      p {
-        color: white;
-        font-size: 1rem;
+      .banner-time {
+        grid-column: 2 / 4;
+        grid-row: 3 / 4;
+        color: var(--color-white);
+        font-size: 14px;
+      }
+
+      .ramaining-time {
+        grid-column: 2 / 4;
+        grid-row: 4 / 4;
+        color: var(--color-white);
+        font-size: var(--font-size-small);
       }
 
       .banner-exp {
         grid-column: 3 / 4;
         grid-row: 3 / 4;
+        color: var(--color-white);
+        font-size: var(--font-size-small);
       }
 
       .MuiRating-root {
