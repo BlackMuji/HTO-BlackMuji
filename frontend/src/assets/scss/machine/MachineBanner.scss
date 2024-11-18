@@ -7,6 +7,7 @@
 
   .carousel {
     height: 100%;
+    border-radius: 24px;
 
     .banner-slide {
       padding: 16px 32px;
@@ -15,35 +16,39 @@
       @include flex_center;
 
       .banner-contents {
-        height: 100%; // 부모 높이 상속
+        height: 100%;
         display: grid;
         align-items: center;
         width: 90%;
         grid-template-columns: 30% 40% 30%;
         grid-template-rows: 1fr 1fr 1fr 1fr;
+        white-space: nowrap;
 
         h3 {
           width: 100%;
           grid-column: 1/-1;
           font-size: 1.8rem;
           font-weight: 600;
-          color: white;
+          color: var(--color-white);
         }
 
         .machine-avatar {
           justify-self: center;
           grid-row: 1 / -1;
           grid-row-start: 2;
-          width: 120px;
-          height: 120px;
+          width: clamp(80px, 8vw, 120px);
+          height: clamp(80px, 8vw, 120px);
           top: 0;
           font-size: var(--font-title);
+          margin: 10px;
         }
 
 
         h4 {
-          grid-column: 2/3;
-          font-size: var(--font-size-large);
+          justify-self: flex-start;
+          grid-column: 2;
+          grid-row: 2/4;
+          font-size: 2.8rem;
           color: var(--color-white);
         }
 
@@ -52,17 +57,12 @@
           font-size: 1rem;
         }
 
-        .banner-exp {
-          grid-column: 2/3;
-          font-size: var(--font-size-mid);
-        }
-
         .rating-box {
           height: 100%;
           display: flex;
           align-items: center;
-          grid-column: 2 / 3;
-          grid-row: 4 /4;
+          grid-column: 2;
+          grid-row: 4;
           gap: 8px;
 
           .rating-text {
@@ -72,6 +72,35 @@
           }
         }
 
+        .machine_reward_box {
+          grid-column: 3;
+          grid-row: 2/4;
+          justify-self: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 80%;
+          min-width: 175px;
+          border-radius: 4px;
+          background-color: var(--blue-400);
+          height: 77px;
+
+          .banner-exp,
+          .exp {
+            padding-left: 12px;
+          }
+
+          .banner-exp {
+            font-size: var(--font-size-small);
+            color: var(--color-white);
+          }
+
+          .exp {
+            font-size: var(--font-size-mid);
+            color: #fbff8f;
+            font-weight: 600;
+          }
+        }
 
         .MuiRating-root {
           color: #ffd700;
@@ -85,6 +114,7 @@
 
         .go-to-machine-btn {
           @include button_color;
+          justify-self: center;
           width: 80%;
           min-width: 175px;
           grid-column: 3;

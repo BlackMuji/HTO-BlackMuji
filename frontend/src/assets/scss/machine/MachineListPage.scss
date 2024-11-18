@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow-y: hidden;
 
     .gradient-wrapper {
         width: 100%;
@@ -17,7 +18,7 @@
             width: calc(100% - 28vh);
             height: 100%;
             border-radius: var(--border-container);
-            background: var(--gradient-container);
+            background: var(--blue-500);
         }
 
         .register-machine {
@@ -32,7 +33,7 @@
             background: var(--color-background-transparent);
 
             &:hover {
-                background: linear-gradient(96.7deg, var(--blue-500), var(--blue-300));
+                background: var(--blue-400);
                 opacity: 0.9;
 
                 .machine,
