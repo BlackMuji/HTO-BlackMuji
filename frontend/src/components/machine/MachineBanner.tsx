@@ -10,6 +10,7 @@ import { Paper, Button, Avatar } from '@mui/material';
 import { ArrowForwardIos, ArrowBackIos } from '@mui/icons-material';
 import { getAvatarColorIndex, avatarBackgroundColors } from '../../utils/avatars';
 import LoadingIcon from '../public/LoadingIcon';
+import ErrorIcon from '../public/ErrorIcon';
 
 const MachineBanner: React.FC = () => {
   const [latestMachine, setLatestMachine] = useState<MachineforBanner | null>(null);
@@ -42,7 +43,7 @@ const MachineBanner: React.FC = () => {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <ErrorIcon />;
   }
 
   const machines = [
@@ -91,9 +92,11 @@ const MachineBanner: React.FC = () => {
                   {machine.name.charAt(0).toUpperCase()}
                 </Avatar>
                 <h4>{machine.name}</h4>
-                <p className='banner-exp'>Exp: {machine.exp}</p>
+                {/* <p className='banner-category'>Category: {machine.category}</p> */}
+                <p className='banner-exp'>Rewards: {machine.exp} EXP</p>
+                {/* {mostPlayedMachine && machine.playerCount > 0 && <p className='banner-played'>Played: {machine.playerCount}</p>} */}
                 <Box className='rating-box'>
-                  <Rating
+                <Rating
                     name={`read-only-rating-${machine._id}`}
                     value={Number(machine.rating)}
                     precision={0.5}
@@ -109,7 +112,9 @@ const MachineBanner: React.FC = () => {
                 <Button
                   className='go-to-machine-btn'
                   variant="contained"
+                  color="primary"
                   onClick={() => navigate(`/machine/${machine._id}`)}
+
                 >
                   Go to Machine
                 </Button>
