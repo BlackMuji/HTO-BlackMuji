@@ -94,7 +94,7 @@ const ContestList: React.FC = () => {
                   height: 40,
                 }}>
                 {avatarUrls[getAvatarIndex(contest.name)] && contest.name.charAt(0).toUpperCase()}
-              </Avatar>{contest.name || 'N/A'}</td>
+              </Avatar>{contest.name.charAt(0).toUpperCase() + contest.name.slice(1) || 'N/A'}</td>
             <td className={styles.contest_start_time}>{contest.startTime ? formatDate(contest.startTime) : 'N/A'}</td>
             <td className={styles.contest_end_time}>{contest.endTime ? formatDate(contest.endTime) : 'N/A'}</td>
             <td className={styles.contest_reward}>{contest.contestExp}</td>
@@ -118,25 +118,25 @@ const ContestList: React.FC = () => {
 
   return (
     <div className={styles.contest_list_container}>
-      <div className={styles.contest_list_title}>Contest List</div>
+      <div className={styles.contest_list_title}>Contests</div>
       <div className={styles.tabs}>
         <button
           className={`${styles.tab_button} ${activeTab === 'ongoing' ? styles.active : ''}`}
           onClick={() => setActiveTab('ongoing')}
         >
-          Ongoing Contests
+          <p>Ongoing Contests</p>
         </button>
         <button
           className={`${styles.tab_button} ${activeTab === 'notStarted' ? styles.active : ''}`}
           onClick={() => setActiveTab('notStarted')}
         >
-          Not Started Contests
+          <p>Not Started Contests</p>
         </button>
         <button
           className={`${styles.tab_button} ${activeTab === 'ended' ? styles.active : ''}`}
           onClick={() => setActiveTab('ended')}
         >
-          Ended Contests
+          <p>Ended Contests</p>
         </button>
       </div>
       <table className={styles.contest_list_table}>

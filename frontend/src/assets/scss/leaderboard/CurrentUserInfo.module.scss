@@ -4,19 +4,19 @@
   position: relative;
   display: flex;
   border-radius: 24px 24px 0 0;
-  background: var(--blue-400);
+  background: linear-gradient(to right, var(--blue-500), var(--lightblue-200));
 
   justify-content: space-around;
   align-items: center;
 
-  font-size: var(--font-size-large);
+  font-size: var(--font-title);
   color: var(--color-white);
   font-family: var(--font-ibm-plex-sans);
 
   .user_rank,
   .user_level {
     min-width: 50px;
-    font-size: var(--font-size-mid);
+    font-size: var(--font-size-large);
     text-align: center;
   }
 

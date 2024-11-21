@@ -48,7 +48,7 @@ const MachineBanner: React.FC = () => {
 
   const machines = [
     { ...latestMachine!, title: <><b>Latest Machine</b></> },
-    { ...mostPlayedMachine!, title: <><b>Most Played Machine</b></> },
+    { ...mostPlayedMachine!, title: <><b>Trending Machine</b></> },
   ];
 
   return (
@@ -91,9 +91,9 @@ const MachineBanner: React.FC = () => {
                 >
                   {machine.name.charAt(0).toUpperCase()}
                 </Avatar>
-                <h4>{machine.name}</h4>
+                <h4><b>{machine.name.charAt(0).toUpperCase() + machine.name.slice(1)}</b></h4>
                 <div className='machine_reward_box'>
-                  <p className='banner-exp'>Reward :</p>
+                  <p className='banner-exp'>Reward</p>
                   <p className='exp'>{machine.exp} EXP</p>
                 </div>
                 <Box className='rating-box'>

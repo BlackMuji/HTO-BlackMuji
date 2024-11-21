@@ -14,7 +14,9 @@
     .tabs {
         display: flex;
         margin: 0 16px 0;
-
+        p {
+            font-weight: bold;
+        }
         .tab_button {
             min-width: 120px;
             padding: 8px 24px;
@@ -87,7 +89,7 @@
                 font-size: var(--font-size-small);
                 letter-spacing: -0.01em;
                 font-weight: 600;
-                color: #b5b7c0;
+                color: var(--color-white-200);
                 text-align: left;
             }
 
