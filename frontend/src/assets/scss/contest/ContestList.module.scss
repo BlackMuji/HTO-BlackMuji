@@ -51,7 +51,6 @@
 
     .contest_list_table {
         width: 100%;
-        display: table;
         display: flex;
         flex-direction: column;
 
@@ -59,7 +58,10 @@
             @include scrollbar-none;
             display: block;
             overflow-y: auto;
-            max-height: 350px;
+
+            tr {
+                height: 70px !important;
+            }
         }
 
         thead {
