@@ -12,6 +12,9 @@ import GiveUpButton from '../../components/play/GiveUpButton';
 import Main from '../../components/main/Main';
 import { Instance } from '../../types/Instance';
 import ErrorIcon from '../../components/public/ErrorIcon';
+import '../../assets/scss/machine/MachinePlayPage.scss';
+
+
 
 /**
  * Interface representing the Machine details.
@@ -124,9 +127,6 @@ const MachinePlayPage: React.FC = () => {
   return (
     <Main>
       <div className="machine-play-container">
-        <div className="machine-play-title">
-          <h2>Machine Play</h2>
-        </div>
         <div className="machine-play-name">
           <h3>Now Playing: {machine.name}</h3>
         </div>

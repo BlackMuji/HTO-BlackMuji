@@ -1,0 +1,23 @@
+.download-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background-color: var(--blue-300);
+    color: var(--color-white);
+    padding: 24px;
+    gap: 16px;
+
+    .download-title {
+        .upper-text {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+        }
+    }
+
+    .download-vpn-button {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+    }
+}
