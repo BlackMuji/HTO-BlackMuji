@@ -3,6 +3,8 @@ import { submitFlagMachine } from '../../api/axiosMachine';
 import { submitFlagForContest } from '../../api/axiosContest';
 import { submitFlagInstance } from '../../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import '../../assets/scss/play/SubmitFlagForm.scss';
+import { TiFlag } from "react-icons/ti";
 
 /**
  * Props interface for SubmitFlagForm component.
@@ -110,7 +112,10 @@ const SubmitFlagForm: React.FC<SubmitFlagFormProps> = ({ machineId, playType, co
 
   return (
     <div className="submit-flag-form">
-      <h3>Submit Flag</h3>
+      <div className='upper-text'>
+        <TiFlag size={40} color="white" />
+        <h2>Submit Flag</h2>
+      </div>
       {errors.length > 0 && (
         <div className="error-messages">
           {errors.map((error, idx) => (
@@ -121,19 +126,17 @@ const SubmitFlagForm: React.FC<SubmitFlagFormProps> = ({ machineId, playType, co
         </div>
       )}
       {message && <p className="message">{message}</p>}
-      <form onSubmit={handleSubmitFlag}>
-        <div className="flag-input-group">
-          <label htmlFor="flag">Flag:</label>
-          <input
-            id="flag"
-            type="text"
-            value={flag}
-            onChange={(e) => setFlag(e.target.value)}
-            placeholder="Enter flag here"
-            required
-            disabled={disabled} // Disable input when disabled
-          />
-        </div>
+      <form className="flag-form" onSubmit={handleSubmitFlag}>
+        <input
+          className='flag-input'
+          id="flag"
+          type="text"
+          value={flag}
+          onChange={(e) => setFlag(e.target.value)}
+          placeholder="Enter flag here"
+          required
+          disabled={disabled} // Disable input when disabled
+        />
         <button
           type="submit"
           className="submit-flag-button"

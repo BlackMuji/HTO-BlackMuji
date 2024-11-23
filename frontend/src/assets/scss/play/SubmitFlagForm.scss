@@ -1,0 +1,61 @@
+.submit-flag-form {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-white);
+    width: 80%;
+    height: 170px;
+    background-color: var(--blue-300);
+    border-radius: 24px;
+    padding: 24px;
+    gap: 8px;
+
+    .upper-text {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        h2 {
+            font-weight: 600;
+          }
+    }
+    
+    .flag-form {
+        position: relative; 
+
+        .flag-input {
+            margin-left: 30px;
+            height: 60px;
+            width: 470px;
+            background-color: var(--blue-400);
+            border-radius: 24px;
+            padding-left: 30px;
+            font-size: var(--font-size-small);
+            color: var(--color-white);
+        }
+    
+        .submit-flag-button {
+            position: absolute;
+            right: 0;
+            background-color: var(--blue-400);
+            border: 2px solid var(--blue-400);
+            white-space: nowrap;
+            border-radius: 50px;
+            width: 160px;
+            height: 60px;
+            padding: 5px;
+            font-size: var(--font-size-small);
+            font-weight: 600;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            cursor: pointer;
+            border: 2px solid var(--blue-200);
+
+            &:hover {
+                background-color: var(--blue-100);
+                color: var(--color-gray-400);
+            }
+        }
+    }
+}

@@ -129,6 +129,12 @@ const MachinePlayPage: React.FC = () => {
       <div className="machine-play-container">
         <div className="machine-play-name">
           <h3>Now Playing: {machine.name}</h3>
+          <GiveUpButton
+            machineId={machineId || ''}
+            machineName={machine.name}
+            mode="machine"
+          //disabled={!isRunning} // Disable based on instance status
+          />
         </div>
         <DisplayReward reward={machine.exp} />
         <DownloadVPNProfile />
@@ -155,12 +161,6 @@ const MachinePlayPage: React.FC = () => {
           machineId={machineId || ''}
           playType="machine"
           disabled={!isRunning} // Disable based on instance status
-        />
-        <GiveUpButton
-          machineId={machineId || ''}
-          machineName={machine.name}
-          mode="machine"
-          //disabled={!isRunning} // Disable based on instance status
         />
       </div>
     </Main>
