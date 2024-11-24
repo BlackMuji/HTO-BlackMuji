@@ -12,6 +12,9 @@ import { Instance } from '../../types/Instance';
 import ErrorIcon from '../../components/public/ErrorIcon';
 import '../../assets/scss/machine/MachinePlayPage.scss';
 import { StatusProvider } from '../../contexts/StatusContext';
+import LoadingIcon from '../../components/public/LoadingIcon';
+
+
 /**
  * Interface representing the Machine details.
  */
@@ -111,7 +114,7 @@ const MachinePlayPage: React.FC = () => {
       <Main>
         <div className="machine-play-container">
           <h2>Machine Play</h2>
-          <div>Loading machine details...</div>
+          <div><LoadingIcon /></div>
         </div>
       </Main>
     );

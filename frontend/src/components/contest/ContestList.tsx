@@ -8,7 +8,7 @@ import { BsArrowRightCircle } from "react-icons/bs";
 
 import { Avatar } from '@mui/material';
 import { avatarUrls, avatarBackgroundColors, getAvatarIndex, getAvatarColorIndex } from '../../utils/avatars';
-import Loading from '../public/Loading';
+import LoadingIcon from '../public/LoadingIcon';
 
 interface Contest {
   _id: string;
@@ -70,14 +70,14 @@ const ContestList: React.FC = () => {
       return (
         <tbody>
           <tr>
-            <td colSpan={6} className="no-data">No contests available.</td>
+            <td colSpan={6} className={styles.no_data}>No contests available.</td>
           </tr>
         </tbody>
       );
     }
 
     if (loading) {
-      return <Loading />;
+      return <LoadingIcon />;
     }
 
     return (
@@ -113,7 +113,7 @@ const ContestList: React.FC = () => {
   };
 
   if (loading) {
-    return <Loading />;
+    return <LoadingIcon />;
   }
 
   return (

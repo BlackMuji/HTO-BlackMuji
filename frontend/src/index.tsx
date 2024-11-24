@@ -5,7 +5,6 @@ import "./assets/scss/style.scss";
 import { AuthUserProvider } from './contexts/AuthUserContext';
 import { SidebarProvider } from './contexts/SidebarContext';
 import { ProfileProvider } from './contexts/ProfileContext';
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import routes from './routes';
 const rootElement = document.getElementById('root') as HTMLElement;
@@ -31,7 +30,7 @@ root.render(
             future={{
               v7_startTransition: true,
             }}
-            router={router}
+            router={router} 
           />
         </ProfileProvider>
       </SidebarProvider>

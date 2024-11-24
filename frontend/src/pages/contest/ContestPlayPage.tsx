@@ -138,7 +138,7 @@ const ContestPlayPage: React.FC = () => {
           </div>
           <div className='timer-box'>
             <h3>Time Left : </h3>
-            <Timer endTime={contest.endTime} />
+            <Timer endTime={new Date(contest.endTime)} />
           </div>
           <div className='select-box'>
             {/* List of Machines */}
