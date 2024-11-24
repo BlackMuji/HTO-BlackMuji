@@ -40,6 +40,7 @@ const GetHints: React.FC<GetHintsProps> = ({ machineId, playType, contestId, dis
   const [hintsUsed, setHintsUsed] = useState<number>(0);
   const [remainingHints, setRemainingHints] = useState<number>(0);
 
+  console.log(machineId, contestId, playType);
   /**
    * Fetch used hints and progress for contest mode.
    */

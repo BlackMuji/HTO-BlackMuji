@@ -2,19 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getActiveMachineDetails } from '../../api/axiosMachine';
 import { getInstanceByMachine } from '../../api/axiosInstance';
-import GetHints from '../../components/play/GetHints';
 import StartInstanceButton from '../../components/play/StartInstanceButton';
 import DownloadVPNProfile from '../../components/play/DownloadVPNProfile';
 import InstanceInfo from '../../components/play/InstanceInfo';
 import SubmitFlagForm from '../../components/play/SubmitFlagForm';
 import GiveUpButton from '../../components/play/GiveUpButton';
-import StatusIcon from '../../components/play/StatusIcon';
 import Main from '../../components/main/Main';
 import { Instance } from '../../types/Instance';
 import ErrorIcon from '../../components/public/ErrorIcon';
 import '../../assets/scss/machine/MachinePlayPage.scss';
-
-
+import { StatusProvider } from '../../contexts/StatusContext';
 /**
  * Interface representing the Machine details.
  */
@@ -44,8 +41,6 @@ const MachinePlayPage: React.FC = () => {
   const [instanceStatus, setInstanceStatus] = useState<Instance['status']>(null);
   const [instanceStarted, setInstanceStarted] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [downloadStatus, setDownloadStatus] = useState<'idle' | 'inProgress' | 'completed'>('idle');
-  const [submitStatus, setSubmitStatus] = useState<'flag' | 'flag-success'>('flag');
 
   // Fetch machine details and check for existing instance when component mounts
   useEffect(() => {
@@ -125,10 +120,6 @@ const MachinePlayPage: React.FC = () => {
   // Determine if controls should be disabled based on instance status
   const isRunning = instanceStatus === 'running';
 
-  const handleFlagSuccess = () => {
-    setSubmitStatus('flag-success'); // 정답을 제출했을 때 상태를 flag-success로 변경
-  };
-
   return (
     <Main>
       <div className="machine-play-container">
@@ -141,55 +132,39 @@ const MachinePlayPage: React.FC = () => {
           //disabled={!isRunning} // Disable based on instance status
           />
         </div>
-        <div className='download-box'>
-          <StatusIcon status={downloadStatus} />
-          <DownloadVPNProfile
-            downloadStatus={downloadStatus}
-            setDownloadStatus={setDownloadStatus}
-          />
-        </div>
-        {/* Conditionally render StartInstanceButton or InstanceInfo */}
-        <div className='btn-box'>
-          <StatusIcon
-            status={
-              !instanceStarted
-                ? 'idle'
-                : instanceStatus === 'stopped'
-                  ? 'idle'
-                  : instanceStatus === 'pending'
-                    ? 'inProgress'
-                    : 'completed'
-            }
-          />
-          <div className='instance-hint-box'>
-            {!instanceStarted ? (
-              <StartInstanceButton
-                machineId={machineId || ''}
-                onInstanceStarted={handleInstanceStarted}
-                disabled={downloadStatus !== 'completed'} // Pass the callback
-              />
-            ) : (
-              <InstanceInfo
-                machineId={machineId || ''}
-                onStatusChange={handleInstanceStatusChange}
-              />
-            )}
-            <GetHints
-              machineId={machineId || ''}
-              playType="machine"
-              disabled={!isRunning} // Disable based on instance status
-            />
+        <StatusProvider initialStatus="idle">
+          <div className='download-box'>
+            <DownloadVPNProfile />
           </div>
-        </div>
+        </StatusProvider>
+        {/* Conditionally render StartInstanceButton or InstanceInfo */}
+        <StatusProvider initialStatus="idle">
+          <div className='btn-box'>
+            <div className='instance-hint-box'>
+              {!instanceStarted ? (
+                <StartInstanceButton
+                  machineId={machineId || ''}
+                  onInstanceStarted={handleInstanceStarted}
+                />
+              ) : (
+                <InstanceInfo
+                  machineId={machineId || ''}
+                  instplayType="machine"
+                  onStatusChange={handleInstanceStatusChange}
+                />
+              )}
+            </div>
+          </div>
+        </StatusProvider>
+        <StatusProvider initialStatus="flag">
         <div className='submit-box'>
-          <StatusIcon status={submitStatus} />
           <SubmitFlagForm
             machineId={machineId || ''}
             playType="machine"
             disabled={!isRunning} // Disable based on instance status
-            onFlagSuccess={handleFlagSuccess}
           />
         </div>
+        </StatusProvider>
       </div>
     </Main>
   );
