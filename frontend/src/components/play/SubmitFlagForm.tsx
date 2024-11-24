@@ -2,7 +2,6 @@ import React, { useState, FormEvent } from 'react';
 import { submitFlagMachine } from '../../api/axiosMachine';
 import { submitFlagForContest } from '../../api/axiosContest';
 import { submitFlagInstance } from '../../api/axiosInstance';
-import { useNavigate } from 'react-router-dom';
 import '../../assets/scss/play/SubmitFlagForm.scss';
 import { LuFlag } from "react-icons/lu";
 import { CiLock } from "react-icons/ci";
@@ -43,7 +42,6 @@ const SubmitFlagForm: React.FC<SubmitFlagFormProps> = ({ machineId, playType, co
   const [message, setMessage] = useState<string>('');
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
 
   /**
    * Handles the flag submission form.
