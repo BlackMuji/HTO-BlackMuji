@@ -3,7 +3,8 @@ import { getUsedHintsInContest, getHintInContest } from '../../api/axiosContest'
 import { getUsedHints, getMachineHints } from '../../api/axiosMachine';
 import LoadingIcon from '../public/LoadingIcon';
 import '../../assets/scss/play/GetHints.scss';
-import { FaQuestionCircle } from "react-icons/fa";
+import { GoQuestion } from "react-icons/go";
+import { CiLock } from "react-icons/ci";
 
 /**
  * Props interface for GetHints component.
@@ -134,7 +135,7 @@ const GetHints: React.FC<GetHintsProps> = ({ machineId, playType, contestId, dis
   return (
     <div className="get-hints-container">
       <div className="upper-text">
-        <FaQuestionCircle size={40} color="white" />
+        <GoQuestion size={40} color="white" />
         <h2>Hints</h2>
       </div>
       <h3>If you need a hint, Press the button</h3>
@@ -152,18 +153,16 @@ const GetHints: React.FC<GetHintsProps> = ({ machineId, playType, contestId, dis
       <button
         onClick={fetchHint}
         disabled={loading || remainingHints === 0 || disabled}
-        className="get-hints-button"
+        className={`get-hints-button ${disabled || remainingHints === 0 ? "disabled" : ""}`}
       >
         {loading ? (
           <LoadingIcon />
-        ) : disabled ? (
-          'Disabled'
-        ) : remainingHints === 0 ? (
-          'No More Hints'
+        ) : disabled || remainingHints === 0 ? (
+          <CiLock size={40} color="#ccc" /> // disabled일 때 아이콘 렌더링
         ) : (
           'Hint'
         )}
-        {!disabled && ` (${remainingHints})`}
+        {!disabled && remainingHints > 0 && ` (${remainingHints})`}
       </button>
     </div>
   );

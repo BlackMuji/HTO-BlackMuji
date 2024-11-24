@@ -3,9 +3,9 @@
     position: relative;
     flex-direction: column;
     color: var(--color-white);
-    width: 80%;
+    width: 100%;
     height: 170px;
-    background-color: var(--blue-300);
+    background-color: var(--blue-400);
     border-radius: 24px;
     padding: 24px;
     gap: 8px;
@@ -25,14 +25,19 @@
         right: 24px;
         bottom: 24px;
     }
+
+    .start-instance-btn.disabled {
+        opacity: 0.5; /* 흐려짐 효과 */
+        cursor: not-allowed; /* 금지된 커서 */
+        pointer-events: none; /* 상호작용 방지 */
+      }
 }
 
 .start-instance-btn {
-
     /* From Uiverse.io by Na3ar-17 */
     .download-label {
         background-color: var(--blue-400);
-        border: 2px solid var(--blue-400);
+        border: 2px solid var(--blue-200);
         display: flex;
         align-items: center;
         border-radius: 50px;

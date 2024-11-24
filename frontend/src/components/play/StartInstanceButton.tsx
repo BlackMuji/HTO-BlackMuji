@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { startInstance } from '../../api/axiosInstance';
 import LoadingIcon from '../public/LoadingIcon';
 import '../../assets/scss/play/StartInstanceButton.scss';
-import { FaDotCircle } from "react-icons/fa";
-
+import { AiOutlineCloudServer } from "react-icons/ai";
+import { IoIosPlay } from "react-icons/io";
 
 /**
  * Props interface for StartInstanceButton component.
@@ -11,6 +11,7 @@ import { FaDotCircle } from "react-icons/fa";
 interface StartInstanceButtonProps {
   machineId: string;
   onInstanceStarted: () => void;
+  disabled?: boolean;
 }
 
 /**
@@ -25,7 +26,7 @@ interface StartInstanceResponse {
 /**
  * Component to start an instance for a machine.
  */
-const StartInstanceButton: React.FC<StartInstanceButtonProps> = ({ machineId, onInstanceStarted }) => {
+const StartInstanceButton: React.FC<StartInstanceButtonProps> = ({ machineId, onInstanceStarted, disabled = false }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -50,37 +51,23 @@ const StartInstanceButton: React.FC<StartInstanceButtonProps> = ({ machineId, on
   return (
     <div className="start-instance-button-container">
       <div className='upper-text'>
-        <FaDotCircle size={40} color="white" />
+        <AiOutlineCloudServer size={40} color="white" />
         <h2>Spawn Machine</h2>
       </div>
       <h3>Create machine and Start hacking.</h3>
-      <div className="start-instance-btn">
+      <div className={`start-instance-btn ${disabled ? "disabled" : ""}`}>
         <label className="download-label">
           <input
             type="checkbox"
             className="download-input"
             onClick={handleStartInstance} // 기존의 onClick 동작
-            disabled={loading} // 기존의 disabled 상태 반영
+            disabled={ disabled || loading} // 기존의 disabled 상태 반영
           />
           <span className="download-circle">
             {loading ? (
               <LoadingIcon /> // 로딩 상태일 때 LoadingIcon 렌더링
             ) : (
-              <svg
-                className="download-icon"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M12 19V5m0 14-4-4m4 4 4-4"
-                ></path>
-              </svg>
+              <IoIosPlay size={30}/>
             )}
             <div className="download-square"></div>
           </span>

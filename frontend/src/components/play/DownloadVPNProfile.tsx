@@ -1,16 +1,23 @@
 import React from 'react';
 import { downloadOpenVPNProfile } from '../../api/axiosInstance';
-import { IoMdDownload } from "react-icons/io";
+import { TbBrandOpenvpn } from "react-icons/tb";
 import '../../assets/scss/play/DownloadVPNProfile.scss';
 
+
+interface DownloadVPNProfileProps {
+  downloadStatus: 'idle' | 'inProgress' | 'completed';
+  setDownloadStatus: React.Dispatch<React.SetStateAction<'idle' | 'inProgress' | 'completed'>>;
+}
 /**
  * Component to download the OpenVPN profile.
  */
-const DownloadVPNProfile: React.FC = () => {
+const DownloadVPNProfile: React.FC<DownloadVPNProfileProps> = ({ downloadStatus, setDownloadStatus }) => {
   /**
    * Handles the VPN profile download.
    */
   const handleDownload = async () => {
+    setDownloadStatus('inProgress'); // 상태: 진행 중
+
     try {
       const response = await downloadOpenVPNProfile();
 
@@ -29,9 +36,11 @@ const DownloadVPNProfile: React.FC = () => {
       link.parentNode?.removeChild(link);
       window.URL.revokeObjectURL(url);
 
+      setDownloadStatus('completed'); // 상태: 완료
     } catch (error: any) {
       console.error('Error downloading OpenVPN profile:', error);
       alert(error.response?.data?.msg || 'Failed to download OpenVPN profile.');
+      setDownloadStatus('idle'); // 상태: 대기로 복구
     }
   };
 
@@ -39,7 +48,7 @@ const DownloadVPNProfile: React.FC = () => {
     <div className="download-container">
       <div className='text-button-container'>
         <div className="upper-text">
-          <IoMdDownload color="white" size={40} />
+          <TbBrandOpenvpn color="white" size={40} />
           <h2><b>Connect</b></h2>
         </div>
         <h3>Connect using OpenVPN
@@ -48,7 +57,7 @@ const DownloadVPNProfile: React.FC = () => {
         </h3>
         <div className='download-btn'>
           <label className="download-label">
-            <input type="checkbox" className="download-input" onClick={handleDownload} />
+            <input type="checkbox" className="download-input" onClick={handleDownload} disabled={downloadStatus === 'inProgress'}/>
             <span className="download-circle">
               <svg
                 className="download-icon"

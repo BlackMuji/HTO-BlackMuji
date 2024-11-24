@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     color: var(--color-white);
-    width: 80%;
+    width: 100%;
     height: 170px;
-    background-color: var(--blue-300);
+    background-color: var(--blue-400);
     border-radius: 24px;
     padding: 24px;
     gap: 8px;
@@ -26,11 +26,16 @@
             margin-left: 30px;
             height: 60px;
             width: 470px;
-            background-color: var(--blue-400);
+            background-color: var(--blue-200);
             border-radius: 24px;
             padding-left: 30px;
             font-size: var(--font-size-small);
             color: var(--color-white);
+            
+            &:focus {
+                outline: none;
+                border: none;
+            }
         }
     
         .submit-flag-button {
@@ -57,5 +62,49 @@
                 color: var(--color-gray-400);
             }
         }
+
+        .disabled {
+            opacity: 0.5; /* 흐려짐 효과 */
+            cursor: not-allowed; /* 금지된 커서 */
+            pointer-events: none; /* 상호작용 방지 */
+        }
     }
 }
+
+/* 애니메이션 정의: 빨갛게 반짝이는 효과 */
+@keyframes shake {
+    0% { 
+      transform: translateX(0);
+      border-color: #f8d7da;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      opacity: 0.8;
+    }
+    25% { 
+      transform: translateX(-5px);
+      border-color: #f8d7da;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      opacity: 0.8;
+    }
+    50% { 
+      transform: translateX(5px);
+      border-color: #f8d7da;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      opacity: 0.8;
+    }
+    75% { 
+      transform: translateX(-5px);
+      border-color: #f8d7da;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      opacity: 0.8;
+    }
+    100% { 
+      transform: translateX(0);
+      border-color: #f8d7da;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      opacity: 0.8;
+    }
+  }
+  
+  .shake-error {
+    animation: shake 0.5s ease-in-out;
+  }
