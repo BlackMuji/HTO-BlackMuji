@@ -151,7 +151,7 @@ const ContestPlayPage: React.FC = () => {
           <div className="select-machines">
             <div className='select-text'>
               <BsListCheck size={40} color="white" />
-              <h2><b>Select a Machine:</b></h2>
+              <h2><b>Select a Machine</b></h2>
             </div>
             <select
               className="select-machine-dropdown"
