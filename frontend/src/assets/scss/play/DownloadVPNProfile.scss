@@ -5,11 +5,17 @@
   color: var(--color-white);
   width: 100%;
   height: 200px;
-  background-color: var(--blue-400);
+  background-color: var(--color-layout);
+  border: 2px solid var(--color-white);
   border-radius: 24px;
   padding: 24px;
   margin-bottom: 24px;
   gap: 8px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border: 2px solid var(--blue-200);
+  }
 
   .upper-text {
     display: flex;
@@ -30,6 +36,12 @@
     position: absolute;
     right: 24px;
     bottom: 24px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      filter: drop-shadow(0 0 10px var(--blue-500));
+      transform: translateY(-2px);
+    }
   }
 }
 
@@ -46,8 +58,8 @@
 }
 
 .download-label {
-  background-color: var(--blue-400);
-  border: 2px solid var(--blue-200);
+  background-color: var(--color-layout);
+  border: 2px solid var(--color-white);
   display: flex;
   align-items: center;
   border-radius: 50px;
@@ -57,6 +69,69 @@
   transition: all 0.4s ease;
   padding: 5px;
   position: relative;
+
+  &.instance-started {
+    .download-circle {
+      animation: pulse 1s forwards;
+      rotate: 180deg;
+
+      .download-icon {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .download-square {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .download-title {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .download-title:last-child {
+      opacity: 1;
+      visibility: visible;
+      right: 56px;
+    }
+  }
+
+  &.clicked {
+    width: 57px;
+
+    .download-circle {
+      animation: pulse 1s forwards;
+      rotate: 180deg;
+
+      &::before {
+        height: 100%;
+        background-color: var(--blue-300);
+      }
+
+      .download-icon {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .download-square {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .download-title {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .download-title:last-child {
+      opacity: 1;
+      visibility: visible;
+      right: 56px;
+    }
+  }
 }
 
 .download-label::before {
@@ -102,7 +177,8 @@
   height: 45px;
   width: 45px;
   border-radius: 50%;
-  background-color: var(--blue-300);
+  border: 2px solid var(--color-white);
+  background-color: var(--color-layout);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,7 +217,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  background-color: #3333a8;
+  background-color: var(--blue-300);
   width: 100%;
   height: 0;
   transition: all 0.4s ease;
