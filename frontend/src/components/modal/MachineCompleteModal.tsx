@@ -4,7 +4,12 @@ import Modal from '../../components/modal/Modal';
 import Confetti from 'react-confetti';
 import '../../assets/scss/etc/MachineCompleteMD.scss';
 
-const MachineCompleteModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+interface MachineCompleteModalProps {
+  onClose: () => void;
+  expEarned: number;
+}
+
+const MachineCompleteModal: React.FC<MachineCompleteModalProps> = ({ onClose, expEarned }) => {
   const navigate = useNavigate();
   const [showConfetti, setShowConfetti] = useState(true);
   const [opacity, setOpacity] = useState(1);
@@ -53,8 +58,9 @@ const MachineCompleteModal: React.FC<{ onClose: () => void }> = ({ onClose }) =>
         <div className="machine-complete-modal">
           <div className="title">🎉 Machine Completed! 🎉</div>
           <div className="content">You have successfully completed the machine.</div>
+          <div className="exp-earned"><b>+ {expEarned} EXP!</b></div>
           <button onClick={handleGoToMachines} className="redirect-button">
-            Go to Machines
+            Back to Machines
           </button>
         </div>
       </Modal>

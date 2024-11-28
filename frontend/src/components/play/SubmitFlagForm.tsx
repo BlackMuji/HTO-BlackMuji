@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { submitFlagMachine } from '../../api/axiosMachine';
 import { submitFlagForContest } from '../../api/axiosContest';
 import { submitFlagInstance } from '../../api/axiosInstance';
@@ -15,7 +16,7 @@ interface SubmitFlagFormProps {
   machineId: string;
   playType: 'machine' | 'contest';
   contestId?: string; // Optional, required only for contest mode
-  onFlagSuccess: () => void;
+  onFlagSuccess: () => void; // Updated to accept expEarned
 }
 
 /**
@@ -32,17 +33,19 @@ interface ErrorMessage {
 interface SubmitFlagResponse {
   msg?: string;
   errors?: ErrorMessage[];
+  expEarned?: number; // Added expEarned to handle the response
 }
 
 /**
  * Component for submitting a flag for a machine or contest.
  */
 const SubmitFlagForm: React.FC<SubmitFlagFormProps> = ({ machineId, playType, contestId, onFlagSuccess }) => {
+  const navigate: NavigateFunction = useNavigate();
   const [flag, setFlag] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
   const [showMachineCompleteModal, setShowMachineCompleteModal] = useState(false);
-
+  const [machineExpEarned, setMachineExpEarned] = useState<number>(0);
   const { instanceStatus, setInstanceStatus, setSubmitStatus, setDownloadStatus } = usePlayContext();
   const disabled = instanceStatus !== 'running';
 
@@ -89,7 +92,10 @@ const SubmitFlagForm: React.FC<SubmitFlagFormProps> = ({ machineId, playType, co
           }
         }
         setMessage(response.msg || instanceResponse.msg || 'Flag submitted successfully!');
-        onFlagSuccess();
+        if (response.expEarned) {
+          onFlagSuccess();
+          setMachineExpEarned(response.expEarned);
+        }
 
         // Flag submission successful, show modal instead of navigate
         setShowMachineCompleteModal(true);
@@ -106,7 +112,9 @@ const SubmitFlagForm: React.FC<SubmitFlagFormProps> = ({ machineId, playType, co
           response = await submitFlagForContest(contestId, machineId, flag);
         }
         setMessage(response.msg || instanceResponse.msg || 'Flag submitted successfully for contest!');
-        onFlagSuccess();
+        if (response.expEarned) {
+          onFlagSuccess(); 
+        }
       }
     } catch (error: any) {
       // Handle different error structures
@@ -134,6 +142,13 @@ const SubmitFlagForm: React.FC<SubmitFlagFormProps> = ({ machineId, playType, co
         <h2>Submit Flag</h2>
       </div>
       {message && <p className="message"></p>}
+      {errors.length > 0 && (
+        <div className="error-messages">
+          {errors.map((error, index) => (
+            <p key={index} className="error-text">{error.msg}</p>
+          ))}
+        </div>
+      )}
       <form className="flag-form" onSubmit={handleSubmitFlag}>
         <input
           className={`flag-input ${disabled ? "disabled" : ""} ${errors.length ? "error shake-error" : ""}`}
@@ -158,8 +173,11 @@ const SubmitFlagForm: React.FC<SubmitFlagFormProps> = ({ machineId, playType, co
       {showMachineCompleteModal && (
         <MachineCompleteModal onClose={() => {
           setShowMachineCompleteModal(false);
+          navigate(`/play`);
           resetPlayContext();
-        }} />
+        }}
+        expEarned={machineExpEarned}
+        />
       )}
     </div>
   );

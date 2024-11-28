@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AdminProtectedRoute from './components/auth/AdminProtectedRoute';
@@ -9,6 +9,7 @@ import App from './App';
 import './assets/scss/admin/AdminDashboard.scss';
 import AdminLayout from './components/admin/AdminLayout';
 import MachineCompleteModal from './components/modal/MachineCompleteModal';
+import ContestCompleteModal from './components/modal/ContestCompleteMD';
 
 // Lazy-loaded components
 const LoginPage = lazy(() => import('./pages/public/LoginPage'));
@@ -18,7 +19,6 @@ const LeaderBoardPage = lazy(() => import('./pages/leaderboard/LeaderBoardPage')
 const ContestListPage = lazy(() => import('./pages/contest/ContestListPage'));
 const ContestDetailPage = lazy(() => import('./pages/contest/ContestDetailPage'));
 const ContestRegisterPage = lazy(() => import('./pages/contest/ContestRegisterPage'));
-const ContestCompletePage = lazy(() => import('./pages/contest/ContestCompletePage'));
 const PreContestPage = lazy(() => import('./pages/contest/PreContestPage'));
 const ContestPlayPage = lazy(() => import('./pages/contest/ContestPlayPage'));
 const MachineListPage = lazy(() => import('./pages/machine/MachineListPage'));
@@ -31,6 +31,7 @@ const UsersManagement = lazy(() => import('./pages/admin/UsersManagement'));
 const MachinesManagement = lazy(() => import('./pages/admin/MachinesManagement'));
 const ContestsManagement = lazy(() => import('./pages/admin/ContestsManagement'));
 const InstancesManagement = lazy(() => import('./pages/admin/InstancesManagement'));
+const TutorialPage = lazy(() => import('./pages/TutorialPage'));
 const LandingPage = lazy(() => import('./pages/landing/LandingPage'));
 
 const routes: RouteObject[] = [
@@ -43,24 +44,30 @@ const routes: RouteObject[] = [
       {
         path: 'login',
         element: (
-          <Suspense fallback={<Loading />}>
             <LoginPage />
-          </Suspense>
-        ),
-      },
-      
-      // Protected Routes
-      {
-        path: '/intro',
-        element: (
-            <LandingPage />
         ),
       },
       {
         path: '/',
         element: (
+            <LandingPage />
+        ),
+      },
+      
+      // Protected Routes
+      {
+        path: 'empty',
+        element: (
           <ProtectedRoute>
             <MainPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'main',
+        element: (
+          <ProtectedRoute>
+            <TutorialPage />
           </ProtectedRoute>
         ),
       },
@@ -124,7 +131,7 @@ const routes: RouteObject[] = [
         path: 'contest/:contestId/complete',
         element: (
           <ProtectedRoute>
-            <ContestCompletePage />
+            <ContestCompleteModal onClose={() => {}} expEarned={9999} />
           </ProtectedRoute>
         ),
       },
@@ -156,7 +163,7 @@ const routes: RouteObject[] = [
         path: 'machine/:machineId/complete',
         element: (
           <ProtectedRoute>
-            <MachineCompleteModal onClose={() => {}} />
+            <MachineCompleteModal onClose={() => {}} expEarned={9999} />
           </ProtectedRoute>
         ),
       },

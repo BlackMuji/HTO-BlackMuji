@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { getContestDetails, getContestParticipationDetails } from '../../api/axiosContest';
+import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
+import { getContestDetails, getContestParticipationDetails, getContestResult } from '../../api/axiosContest';
 import { getInstanceByMachine } from '../../api/axiosInstance';
 import GetHints from '../../components/play/GetHints';
 import StartInstanceButton from '../../components/play/StartInstanceButton';
@@ -13,7 +13,7 @@ import StatusIcon from '../../components/play/StatusIcon';
 import Main from '../../components/main/Main';
 import { ContestDetail, Machine } from '../../types/Contest';
 import '../../assets/scss/contest/ContestPlayPage.scss';
-import Loading from '../../components/public/Loading';
+import LoadingIcon from '../../components/public/LoadingIcon';
 import ErrorIcon from '../../components/public/ErrorIcon';
 import { PlayProvider, usePlayContext } from '../../contexts/PlayContext';
 import { BsListCheck } from "react-icons/bs";
@@ -32,6 +32,7 @@ interface GetContestDetailsResponse {
  */
 interface GetContestParticipationDetailsResponse {
   participation: ContestParticipation;
+  machinesLeft: number;
   // Add other response properties if available
 }
 
@@ -44,6 +45,15 @@ interface ContestParticipation {
     machine: string;
     completed: boolean;
   }[];
+  expEarned: number;
+}
+
+/**
+ * Interface for API response when fetching contest result.
+ */
+interface GetContestResultResponse {
+  expEarned: number;
+  machinesLeft: number;
 }
 
 /**
@@ -63,14 +73,22 @@ const ContestPlayPage: React.FC = () => {
     submitStatus,
     setSubmitStatus,
   } = usePlayContext();
-
+  const navigate: NavigateFunction = useNavigate();
   // Ref to the container for scrolling and class manipulation
   const containerRef = useRef<HTMLDivElement>(null);
 
   // State to track completed machines (store only machine IDs)
   const [completedMachines, setCompletedMachines] = useState<string[]>([]);
-  // State to handle contest completion
-  const [isContestComplete, setIsContestComplete] = useState<boolean>(false);
+  // State to track total exp earned
+  const [totalExpEarned, setTotalExpEarned] = useState<number>(0);
+  // State to track machines left
+  const [machinesLeft, setMachinesLeft] = useState<number>(-1);
+
+  /**
+   * useEffect to reset selectedMachine to null on component mount.
+   * This ensures that the selected machine is always null when the page is refreshed.
+   */
+
 
   // Fetch contest details and participation details when component mounts
   useEffect(() => {
@@ -98,11 +116,6 @@ const ContestPlayPage: React.FC = () => {
             .map(mc => mc.machine);
           setCompletedMachines(completed);
           console.log('Completed Machines:', completed); // Debugging
-
-          // Check if all machines are completed
-          if (completed.length === contestResponse.contest.machines.length) {
-            setIsContestComplete(true);
-          }
         }
 
         setIsLoading(false);
@@ -114,7 +127,6 @@ const ContestPlayPage: React.FC = () => {
     };
 
     fetchData();
-    setSelectedMachine(null);
   }, [contestId]);
 
   // Handle machine selection
@@ -152,27 +164,28 @@ const ContestPlayPage: React.FC = () => {
   };
 
   // Callback when a flag is successfully submitted
-  const handleFlagSuccess = () => {
+  const handleFlagSuccess = async () => {
     if (selectedMachine) {
       setCompletedMachines((prev) => [...prev, selectedMachine._id]);
       setSubmitStatus('flag-success');
       console.log(`Machine ${selectedMachine._id} marked as completed.`);
-
       // Check if all machines are completed
-      if (completedMachines.length + 1 === contest?.machines.length) {
-        setIsContestComplete(true);
-      } else {
-        // If there are machines left, reset the selected machine to hide the container
-        setSelectedMachine(null);
+      try {
+        const resultResponse: GetContestResultResponse = await getContestResult(contestId || '');
+        setTotalExpEarned(resultResponse.expEarned);
+        setMachinesLeft(resultResponse.machinesLeft);
+      } catch (error: any) {
+        console.error('Error fetching participation details:', error);
       }
     }
+    setSelectedMachine(null);
   };
 
   if (error) {
     return (
       <Main>
         <div className="contest-play-container">
-          <div className="error-message"><ErrorIcon /> {error}</div>
+          <div className="error-message"><ErrorIcon /></div>
         </div>
       </Main>
     );
@@ -182,7 +195,7 @@ const ContestPlayPage: React.FC = () => {
     return (
       <Main>
         <div className="contest-play-container">
-          <Loading />
+          <LoadingIcon />
         </div>
       </Main>
     );
@@ -231,9 +244,8 @@ const ContestPlayPage: React.FC = () => {
             </select>
           </div>
         </div>
-
         {/* Display selected machine container only if a machine is selected and contest is not complete */}
-        {selectedMachine && !isContestComplete ? (
+        {selectedMachine ? (
           <>
             <div className={`selected-machine-container ${submitStatus === 'flag-success' ? 'flag-success' : ''}`} ref={containerRef}>
               <div className="contest-play-name">
@@ -291,10 +303,12 @@ const ContestPlayPage: React.FC = () => {
           // Optionally, you can add a message or keep it empty when no machine is selected
           <div className='no-machine-selected'></div>
         )}
-
-        {/* Display ContestCompleteModal if contest is complete */}
-        {isContestComplete && (
-          <ContestCompleteModal onClose={() => setIsContestComplete(false)} />
+        {machinesLeft === 0 && (
+          <ContestCompleteModal onClose={() => {
+            navigate(`/contest`);
+          }}
+            expEarned={totalExpEarned}
+          />
         )}
       </div>
     </Main>

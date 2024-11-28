@@ -51,7 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
     <div className={`${styles.sidebarMenu} ${isCollapsed ? styles.collapsed : ''}`}>
       <div className={styles.headerParent}>
         <div className={styles.header}>
-          <Link to='/' className={styles.logoimage}>
+          <Link to='/main' className={styles.logoimage}>
             <img className={styles.logoContainerIcon} alt="" src={logo} />
           </Link>
           <div className={styles.sidebarMenuButton}>
@@ -80,12 +80,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
           <div className={styles.topMenu}>
             <li className={styles.verticalMenuList}>
               <Link
-                to="/tutorial"
-                className={`${styles.verticalMenuItem} ${location.pathname.startsWith('/tutorial') ? styles.selected : ''}`}
+                to="/main"
+                className={`${styles.verticalMenuItem} ${location.pathname.startsWith('/main') ? styles.selected : ''}`}
                 data-tooltip="Tutorial"
               >
-                {getMenuIcon('/tutorial', <FaQuestionCircle className={styles.menuIcon} />, <FaRegQuestionCircle className={styles.menuIcon} />)}
-                <div className={styles.label}>Tutorial</div>
+                {getMenuIcon('/main', <FaQuestionCircle className={styles.menuIcon} />, <FaRegQuestionCircle className={styles.menuIcon} />)}
+                <div className={styles.label}>How to Play</div>
               </Link>
               <Link
                 to="/leaderboard"
@@ -100,7 +100,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
                 className={`${styles.verticalMenuItem} ${location.pathname.startsWith('/contest') ? styles.selected : ''}`}
                 data-tooltip="Contests"
               >
-                {getMenuIcon('/contest', <EmojiEventsOutlinedIcon className={styles.menuIcon} />, <EmojiEventsIconRounded className={styles.menuIcon} />)}
+                {getMenuIcon('/contest', <EmojiEventsIconRounded className={styles.menuIcon} />, <EmojiEventsOutlinedIcon className={styles.menuIcon} />)}
                 <div className={styles.label}>Contests</div>
               </Link>
               <Link
