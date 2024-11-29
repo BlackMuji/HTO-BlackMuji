@@ -76,8 +76,8 @@ header .intro-text {
 .btn-custom {
   text-transform: uppercase;
   color: #fff;
-  background-color: var(--blue-200);
-  background-image: linear-gradient(to right, var(--blue-400) 0%, var(--blue-200) 100%);
+  background-color: var(--secondary-layout);
+  background: linear-gradient(to right, var(--color-layout) 0%, var(--secondary-layout) 100%);
   padding: 14px 34px;
   letter-spacing: 1px;
   margin: 0;
@@ -95,7 +95,7 @@ header .intro-text {
 .btn-custom.active {
   color: #fff;
   background-image: none;
-  background-color: var(--blue-300);
+  background-color: var(--secondary-layout);
 }
 
 .btn:active,
