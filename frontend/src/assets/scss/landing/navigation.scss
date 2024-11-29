@@ -44,8 +44,24 @@
     height: 50px;
     padding: 10px 10px;
     line-height: 20px;
+    img {
+        height:80px;
+        
+    }
 }
-
+.logo-image {
+    transition: all 0.2s ease-in-out;
+    transform-origin: center;
+    will-change: transform;
+    border-radius: 8px;
+    backface-visibility: hidden; // Prevents flickering
+    -webkit-font-smoothing: antialiased;
+    
+    &:hover {
+        transform: translateX(-3px);
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+    }
+}
 .navbar-nav>li>a {
     text-transform: uppercase;
     color: #555;

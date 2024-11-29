@@ -1,7 +1,9 @@
 import React from "react";
 import '../../assets/scss/landing/navigation.scss';
+import HTO_LOGO from '@assets/img/icon/HTO LIGHT RECOLORED_crop_filled.png';
 
 const Navigation: React.FC = () => {
+
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="menu-container">
@@ -19,8 +21,12 @@ const Navigation: React.FC = () => {
             <span className="icon-bar"></span>{" "}
           </button>
           <a className="navbar-brand page-scroll" href="#header">
-            Hack This Out
-          </a>{" "}
+            <img 
+              src={HTO_LOGO} 
+              alt="Hack This Out"
+              className="logo-image"
+            />
+          </a>
         </div>
 
         <div
