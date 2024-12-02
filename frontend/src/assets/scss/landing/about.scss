@@ -4,8 +4,20 @@
 }
 
 .about {
-  font-size: 14px;
-  
+  font-size: 20px;
+  height: 70vh;
+  text-wrap: pretty;
+  text-align: left;
+  margin-top: 5%;
+  img {
+    object-fit: contain;
+    object-position: center;
+    width: clamp(300px, 80%, 520px);
+    height: clamp(300px, 80%, 520px);
+    border-radius: 10px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  }
+
   & h3 {
     font-size: 22px;
     font-weight: 600;
@@ -30,6 +42,10 @@
 
   .about-text {
     list-style: none;
+    
+    p {
+      text-indent: 1rem;
+    }
 
     .list-style {
       display: flex;
@@ -48,7 +64,7 @@
 
       &::before {
         color: #5ca9fb;
-        font-size: 11px;
+        font-size: 16px;
         font-weight: 300;
         padding-right: 8px;
       }
@@ -56,7 +72,7 @@
   }
 
   img {
-    width: 520px;
+    width: clamp(300px, 80%, 520px);
     margin-top: 10px;
     background: #fff;
     border-right: 0;
@@ -77,12 +93,12 @@
     text-transform: uppercase;
     margin: 0 0 20px;
     font-weight: 800;
-    font-size: 36px;
+    font-size: 32px;
   }
 
   h4 {
     margin: 5px 0;
-    font-size: 18px;
+    font-size: 24px;
     color: #333;
     font-weight: 600;
   }
@@ -96,6 +112,8 @@
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 0%;
+  margin-bottom: 0%;
 }
 
 

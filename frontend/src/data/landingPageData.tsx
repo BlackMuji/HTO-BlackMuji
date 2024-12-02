@@ -72,7 +72,7 @@ export const landingPageData: LandingPageData = {
   },
   About: {
     paragraph:
-      "Hack This Out is a web-based Hacking Lab.\nWe provide a Secured Network and Virtual Environment for your journey to become a hacker or cyber security enthusiast.\nThe journey can be boring and exhausting, so we provide a Gaming experience for you.",
+      "Hack This Out is a web-based Hacking Lab.\nWe provide Secure Network and Virtual Environment for your journey to become a hacker or cyber security enthusiast.\nThe journey can be rough and exhausting, so we prepared Gaming experience for you.",
     Why: ["Easy to Use", "Play and Compete", "Safe and Secure", "Study and Practice"],
     Why2: ["User-friendly Interface", "Gaming Experience", "Secure Network", "Virtual Environment"],
   },
@@ -161,7 +161,7 @@ export const landingPageData: LandingPageData = {
   ],
   Contact: {
     email: "hackthisout123@gmail.com",
-    github: "github.com",
+    github: "https://github.com/saickersj123/Hack-This-Out",
   },
   Features: [
     {
@@ -177,7 +177,7 @@ export const landingPageData: LandingPageData = {
     {
       icon: <IoGameControllerOutline />,
       title: "Gaming Experience",
-      text: "Fun and interesting Gaming experience for practicing hacking and cybersecurity skills.",
+      text: "Fun and interesting Gaming experience for practicing hacking and your skills.",
     },
     {
       icon: <RiEmotionHappyFill />,

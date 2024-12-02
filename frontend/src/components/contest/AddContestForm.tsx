@@ -282,11 +282,16 @@ const AddContestForm: React.FC<AddContestFormProps> = ({ onContestAdded }) => {
         try {
             setLoading(true);
             const machineIds = machines.map(machine => machine.id).filter(id => id);
+            
+            // Add timezone offset to dates
+            const startTimeWithOffset = new Date(startTime).toISOString();
+            const endTimeWithOffset = new Date(endTime).toISOString();
+
             const contestData = {
                 name,
                 description,
-                startTime,
-                endTime,
+                startTime: startTimeWithOffset,
+                endTime: endTimeWithOffset,
                 machines: machineIds,
                 contestExp
             };
@@ -390,9 +395,9 @@ const AddContestForm: React.FC<AddContestFormProps> = ({ onContestAdded }) => {
                         name='endTime'
                         value={endTime}
                         onChange={handleChange}
-                            className={validationErrors.endTime ? 'error-input' : ''}
-                        />
-                        {validationErrors.endTime && (
+                        className={validationErrors.endTime ? 'error-input' : ''}
+                    />
+                    {validationErrors.endTime && (
                         <span className='field-error'>{validationErrors.endTime}</span>
                     )}
                 </div>
